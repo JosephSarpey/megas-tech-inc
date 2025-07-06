@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiTool, FiCode, FiServer, FiDatabase, FiSmartphone, FiCloud } from 'react-icons/fi';
+import { FiTool, FiCode, FiServer, FiDatabase, FiSmartphone, FiCloud, FiShoppingCart } from 'react-icons/fi';
 
 const services = [
   {
@@ -10,15 +11,20 @@ const services = [
     icon: <FiCode className="w-8 h-8 text-accent" />,
   },
   {
+    title: 'E-commerce Development',
+    description: 'Custom e-commerce websites and applications built with modern technologies for optimal performance and user experience.',
+    icon: <FiShoppingCart className="w-8 h-8 text-accent" />,
+  },
+  {
     title: 'Mobile Development',
     description: 'Native and cross-platform mobile applications for iOS and Android that engage users and drive business growth.',
     icon: <FiSmartphone className="w-8 h-8 text-accent" />,
   },
-  {
-    title: 'Cloud Solutions',
-    description: 'Scalable and secure cloud infrastructure and services to power your applications and business processes.',
-    icon: <FiCloud className="w-8 h-8 text-accent" />,
-  },
+  // {
+    // title: 'Cloud Solutions',
+    // description: 'Scalable and secure cloud infrastructure and services to power your applications and business processes.',
+    // icon: <FiCloud className="w-8 h-8 text-accent" />,
+  // },
   {
     title: 'Database Design',
     description: 'Efficient database architecture and management solutions tailored to your specific data needs.',
