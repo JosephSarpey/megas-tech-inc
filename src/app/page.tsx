@@ -1,103 +1,170 @@
-import Image from "next/image";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+"use client";
+
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Button from '@/components/ui/Button';
+import Testimonials from '@/components/sections/Testimonials';
+import Contact from '@/components/sections/Contact';
+import { motion } from 'framer-motion';
+import Services from '@/components/sections/Services';
+import Projects from '@/components/sections/Projects';
+import BackToTop from '@/components/ui/BackToTop';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const heroRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subheadingRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate elements in sequence
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      
+      // Add null check for headingRef.current
+      const headingSpans = headingRef.current?.querySelectorAll('span');
+      const subheading = subheadingRef.current;
+      const cta = ctaRef.current;
+      
+      if (headingSpans) {
+        tl.fromTo(
+          Array.from(headingSpans),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'back.out(1.7)',
+          }
+        );
+      }
+
+      if (subheading) {
+        tl.fromTo(
+          subheading,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          '-=0.4'
+        );
+      }
+
+      if (cta) {
+        tl.fromTo(
+          cta,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          '-=0.4'
+        );
+      }
+
+      // Parallax effect
+      if (heroRef.current) {
+        gsap.to(heroRef.current, {
+          y: '15%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <section 
+        ref={heroRef}
+        className="relative flex items-center justify-center min-h-screen pt-16 overflow-hidden"
+      >
+        {/* Add pt-16 to account for fixed navbar */}
+        <div className="absolute top-0 left-0 w-full h-16"></div>
+        
+        {/* Animated Background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary to-secondary opacity-90"></div>
+          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
+          
+          {/* Animated elements */}
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-blob animation-delay-4000"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-blob"></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 
+              ref={headingRef}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
+            >
+              <span className="block">Innovative</span>
+              <span className="block text-accent neon-text">Technology</span>
+              <span className="block">Solutions</span>
+            </h1>
+            
+            <p 
+              ref={subheadingRef}
+              className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto"
+            >
+              Transforming ideas into digital reality with cutting-edge web development, 
+              stunning UI/UX design, and expert tech consulting.
+            </p>
+            
+            <div ref={ctaRef} className="flex flex-col sm:flex-row justify-center gap-4 relative z-20">
+              <Button 
+                href="/contact" 
+                variant="accent" 
+                size="lg"
+                className="group relative z-10"
+                withArrow
+              >
+                Get Started
+              </Button>
+              <Button 
+                href="#services"
+                variant="outline"
+                size="lg"
+                className="group relative z-10"
+              >
+                <span>Our Services</span>
+              </Button>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="mt-20 relative z-10">
+              <a 
+                href="#services" 
+                className="inline-flex flex-col items-center text-gray-300 hover:text-accent transition-colors duration-300"
+                aria-label="Scroll down"
+              >
+                <span className="text-sm mb-2">Scroll Down</span>
+                <div className="w-10 h-16 rounded-full border-2 border-gray-400 flex justify-center p-1">
+                  <div className="w-1 h-4 bg-accent rounded-full animate-bounce"></div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="relative py-20 md:py-28 lg:py-36 bg-primary">
+        <Projects />
+      </section>
+      <Services />
+      <Testimonials />
+      <Contact />
+      <BackToTop />
+    </main>
   );
 }
