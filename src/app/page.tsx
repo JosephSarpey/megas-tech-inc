@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useEffect, useRef } from 'react';
@@ -7,10 +6,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Button from '@/components/ui/Button';
 import Testimonials from '@/components/sections/Testimonials';
 import Contact from '@/components/sections/Contact';
-import { motion } from 'framer-motion';
 import Services from '@/components/sections/Services';
 import Projects from '@/components/sections/Projects';
 import BackToTop from '@/components/ui/BackToTop';
+import Link from 'next/link';
+import { FiArrowRight } from 'react-icons/fi';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,13 +85,10 @@ export default function Home() {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative flex items-center justify-center min-h-screen pt-16 overflow-hidden"
+        className="relative flex items-center justify-center min-h-screen pt-16 -mt-16"
       >
-        {/* Add pt-16 to account for fixed navbar */}
-        <div className="absolute top-0 left-0 w-full h-16"></div>
-        
-        {/* Animated Background */}
-        <div className="absolute inset-0 -z-10">
+        {/* Animated Background - Extend to full viewport */}
+        <div className="fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-b from-primary to-secondary opacity-90"></div>
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
@@ -102,7 +99,7 @@ export default function Home() {
           <div className="absolute bottom-1/4 left-1/2 w-80 h-80 bg-accent/10 rounded-full mix-blend-screen filter blur-3xl animate-blob"></div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mt-16">
           <div className="max-w-4xl mx-auto text-center">
             <h1 
               ref={headingRef}
@@ -131,14 +128,13 @@ export default function Home() {
               >
                 Get Started
               </Button>
-              <Button 
-                href="#services"
-                variant="outline"
-                size="lg"
-                className="group relative z-10"
+              <Link 
+                href="/services"
+                className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium rounded-lg border border-white/30 bg-transparent text-white hover:bg-accent/10 hover:border-accent hover:text-accent transition-all duration-300 group"
               >
-                <span>Our Services</span>
-              </Button>
+                Our Services
+                <FiArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
 
             {/* Scroll Indicator */}

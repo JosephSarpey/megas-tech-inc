@@ -90,11 +90,11 @@ const Services = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="relative bg-secondary/50 overflow-hidden">
+    <section ref={sectionRef} id="services" className="relative bg-gray-900 overflow-hidden py-20">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-accent/5 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-accent/5 rounded-full filter blur-3xl"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-accent/30 rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-accent/30 rounded-full filter blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,11 +113,11 @@ const Services = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
             <div
-  key={service.title}
-  ref={el => {
-    if (el) cardsRef.current[index] = el;
-  }}
-  className="group relative bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:scale-105 hover:shadow-accent/10 overflow-hidden"
+              key={service.title}
+              ref={el => {
+                if (el) cardsRef.current[index] = el;
+              }}
+              className="group relative bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:scale-105 hover:shadow-accent/10 overflow-hidden"
             >
               {/* Hover effect */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

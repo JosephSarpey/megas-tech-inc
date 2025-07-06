@@ -221,12 +221,13 @@ const Contact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Your Name <span className="text-red-500">*</span>
+                    Your Name
                   </label>
                   <div className="relative">
                     <input
                       type="text"
                       id="name"
+                      required
                       {...register('name', { required: 'Name is required' })}
                       className={`w-full px-4 py-3 bg-white/5 border ${
                         errors.name ? 'border-red-500' : 'border-white/10'
@@ -241,12 +242,13 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email Address <span className="text-red-500">*</span>
+                    Email Address
                   </label>
                   <div className="relative">
                     <input
                       type="email"
                       id="email"
+                      required
                       {...register('email', {
                         required: 'Email is required',
                         pattern: {
@@ -257,7 +259,7 @@ const Contact = () => {
                       className={`w-full px-4 py-3 bg-white/5 border ${
                         errors.email ? 'border-red-500' : 'border-white/10'
                       } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
-                      placeholder="you@example.com"
+                      placeholder="john@example.com"
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
@@ -268,17 +270,18 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                  Subject <span className="text-red-500">*</span>
+                  Subject
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     id="subject"
+                    required
                     {...register('subject', { required: 'Subject is required' })}
                     className={`w-full px-4 py-3 bg-white/5 border ${
                       errors.subject ? 'border-red-500' : 'border-white/10'
                     } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
-                    placeholder="How can we help you?"
+                    placeholder="How can we help?"
                   />
                   {errors.subject && (
                     <p className="mt-1 text-sm text-red-400">{errors.subject.message}</p>
@@ -288,16 +291,17 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                  Your Message <span className="text-red-500">*</span>
+                  Your Message
                 </label>
                 <div className="relative">
                   <textarea
                     id="message"
                     rows={5}
+                    required
                     {...register('message', { required: 'Message is required' })}
                     className={`w-full px-4 py-3 bg-white/5 border ${
                       errors.message ? 'border-red-500' : 'border-white/10'
-                    } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors resize-none`}
+                    } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
                     placeholder="Tell us about your project..."
                   ></textarea>
                   {errors.message && (
@@ -330,7 +334,7 @@ const Contact = () => {
       </div>
 
       {/* Map */}
-      <div className="mt-20 h-80 md:h-96 w-full relative">
+      <div className="mt-16 h-48 md:h-64 w-full relative">
         <div className="absolute inset-0 bg-gradient-to-t from-secondary to-transparent z-10"></div>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.158170040841!2d-122.3999726846826!3d37.78688297975772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807f4d2f8d1d%3A0x5f5f5f5f5f5f5f5f!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
