@@ -12,20 +12,20 @@ const projects = [
   {
     title: "E-Commerce Platform",
     description: "A scalable online store with seamless checkout and modern UI.",
-    image: "/project1.jpg",
-    link: "#"
+    image: "/vestraversa.png",
+    link: "/projects/ecommerce-platform"
   },
   {
-    title: "SaaS Dashboard",
-    description: "A robust analytics dashboard for business insights.",
-    image: "/project2.jpg",
-    link: "#"
+    title: "Travel Agency Website",
+    description: "A travel agency website with interactive animations and responsive design.",
+    image: "/teebel.jpg",
+    link: "/projects/travel-agency"
   },
   {
-    title: "Portfolio Website",
-    description: "A personal portfolio with interactive animations and responsive design.",
-    image: "/project3.jpg",
-    link: "#"
+    title: "Construction Website",
+    description: "A construction website with interactive animations and responsive design.",
+    image: "/dermolahu.png",
+    link: "/projects/construction"
   }
 ];
 
