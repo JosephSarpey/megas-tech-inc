@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiExternalLink, FiGithub, FiCode } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiCode, FiArrowRight } from 'react-icons/fi';
 
 const projects = [
   {
@@ -11,6 +11,7 @@ const projects = [
     tags: ['React', 'Express.js', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
     github: '#',
     demo: 'https://www.vestraversa.com',
+    link: '/projects/ecommerce-platform'
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const projects = [
     tags: ['Next.js', 'TypeScript', 'Paystack', 'Tailwind CSS'],
     github: '#',
     demo: 'https://teebel-global-travel-consultancy.vercel.app/',
+    link: '/projects/travel-agency'
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ const projects = [
     tags: ['React', 'Framer Motion', 'Tailwind CSS'], 
     github: '#',
     demo: 'https://dermolahu-draughtmanship-construction-works.vercel.app/',
+    link: '/projects/construction'
   },
 ];
 
@@ -100,12 +103,19 @@ export default function ProjectsList() {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-gray-700/50 text-gray-300"
+                className="px-2 py-1 text-xs font-medium bg-gray-700/50 text-gray-200 rounded-full"
               >
                 {tag}
               </span>
             ))}
           </div>
+          <a
+            href={project.link}
+            className="mt-4 inline-flex items-center text-accent hover:text-accent/80 transition-colors text-sm font-medium group"
+          >
+            View Project
+            <FiArrowRight className="ml-1 group-hover:translate-x-1 transition-transform" />
+          </a>
         </motion.div>
       ))}
     </motion.div>
