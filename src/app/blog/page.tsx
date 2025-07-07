@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import BlogPostList from '@/components/blog/BlogPostList';
 
 export const metadata: Metadata = {
-  title: 'Blog | MEGAS TECH',
+  title: 'Blog | MEGAS TECH INC',
   description: 'Insights, tutorials, and updates about technology, development, and industry trends.',
 };
 

@@ -3,7 +3,7 @@ import ContactForm from '@/components/contact/ContactForm';
 import { FiCheckCircle, FiUsers, FiShield, FiHeadphones, FiClock } from 'react-icons/fi';
 
 export const metadata: Metadata = {
-  title: 'Sales Inquiry | MEGAS TECH',
+  title: 'Sales Inquiry | MEGAS TECH INC',
   description: 'Contact our sales team to discuss how we can help grow your business.',
 };
 

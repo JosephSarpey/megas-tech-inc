@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import ProjectsList from '@/components/projects/ProjectsList';
 
 export const metadata: Metadata = {
-  title: 'Our Projects | MEGAS TECH',
+  title: 'Our Projects | MEGAS TECH INC',
   description: 'Explore our portfolio of successful projects and see how we help businesses transform through technology.',
 };
 

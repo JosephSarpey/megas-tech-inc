@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import ServicesList from '@/components/services/ServicesList';
 
 export const metadata: Metadata = {
-  title: 'Our Services | MEGAS TECH',
+  title: 'Our Services | MEGAS TECH INC',
   description: 'Explore our comprehensive range of technology services designed to transform your business.',
 };
 

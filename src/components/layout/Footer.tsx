@@ -10,21 +10,25 @@ const Footer = () => {
   const socialLinks = [
     {
       name: 'GitHub',
+      target: '_blank',
       icon: <FiGithub className="w-5 h-5" />,
-      href: 'https://github.com/megastech',
+      href: 'https://github.com/JosephSarpey',
     },
     {
       name: 'Twitter',
+      target: '_blank', 
       icon: <FiTwitter className="w-5 h-5" />,
       href: 'https://twitter.com/megastech',
     },
     {
       name: 'LinkedIn',
+      target: '_blank',
       icon: <FiLinkedin className="w-5 h-5" />,
       href: 'https://linkedin.com/company/megastech',
     },
     {
       name: 'Email',
+      target: '_blank',
       icon: <FiMail className="w-5 h-5" />,
       href: 'mailto:contact@megastech.inc',
     },
@@ -68,6 +72,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               <span className="text-accent text-2xl font-bold">MEGAS</span>
               <span className="text-white text-2xl font-light">TECH</span>
+              <span className="text-accent text-xl font-bold">INC</span>
             </div>
             <p className="text-gray-400">
               Transforming ideas into digital reality with cutting-edge technology solutions.

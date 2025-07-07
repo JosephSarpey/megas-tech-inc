@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import ContactForm from '@/components/contact/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | MEGAS TECH',
+  title: 'Contact Us | MEGAS TECH INC',
   description: 'Get in touch with our team. We&apos;d love to hear from you about your project or any questions you might have.',
 };
 
