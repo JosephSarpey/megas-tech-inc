@@ -1,8 +1,9 @@
 "use client";
 
-import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle } from 'react-icons/fi';
-import { useState } from 'react';
+import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { useState, useRef, useCallback } from 'react';
 import { motion, Variants } from "framer-motion";
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -21,8 +22,30 @@ type ContactFormProps = {
   selectedPlan?: 'starter' | 'professional' | 'enterprise';
 };
 
+type FormErrors = {
+  name?: string;
+  email?: string;
+  message?: string;
+  captcha?: string;
+  form?: string;
+};
+
 export default function ContactForm({ isSalesInquiry = false, selectedPlan }: ContactFormProps) {
-  const getDefaultMessage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: isSalesInquiry ? 'Sales Inquiry' : '',
+    message: getDefaultMessage(),
+    plan: selectedPlan || '',
+    token: ''
+  });
+  
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const captchaRef = useRef<HCaptcha>(null);
+
+  function getDefaultMessage() {
     if (isSalesInquiry && selectedPlan) {
       return `I'm interested in the ${selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)} plan. ` + 
              'Please provide more information about the next steps.';
@@ -30,27 +53,74 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
     return isSalesInquiry 
       ? "I'm interested in learning more about your services."
       : '';
-  };
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: isSalesInquiry ? 'Sales Inquiry' : '',
-    message: getDefaultMessage(),
-    plan: selectedPlan || ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error when user types
+    if (errors[name as keyof FormErrors]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
+
+  const onCaptchaVerify = useCallback((token: string) => {
+    setFormData(prev => ({
+      ...prev,
+      token
+    }));
+    
+    if (errors.captcha) {
+      setErrors(prev => ({
+        ...prev,
+        captcha: undefined
+      }));
+    }
+  }, [errors.captcha]);
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+    
+    if (!formData.token) {
+      newErrors.captcha = 'Please complete the captcha';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
-  
+    
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -60,23 +130,41 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
         body: JSON.stringify(formData),
       });
   
-      if (response.ok) {
-        setIsSuccess(true);
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          subject: isSalesInquiry ? 'Sales Inquiry' : '',
-          message: getDefaultMessage(),
-          plan: selectedPlan || ''
-        });
+      // Check if the response is JSON
+      const contentType = response.headers.get('content-type');
+      let data;
+      
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
       } else {
-        const error = await response.json();
-        throw new Error(error.message || 'Something went wrong');
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('Server returned an invalid response');
       }
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+      
+      setIsSuccess(true);
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: isSalesInquiry ? 'Sales Inquiry' : '',
+        message: getDefaultMessage(),
+        plan: selectedPlan || '',
+        token: ''
+      });
+      
+      // Reset captcha
+      captchaRef.current?.resetCaptcha();
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Failed to send message. Please try again.');
+      setErrors(prev => ({
+        ...prev,
+        form: 'Failed to send message. Please try again later or contact support.'
+      }));
     } finally {
       setIsSubmitting(false);
     }
@@ -166,7 +254,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
-              Full Name *
+              Full Name {errors.name && <span className="text-red-500">*</span>}
             </label>
             <input
               type="text"
@@ -174,14 +262,21 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-              required
+              className={`w-full px-4 py-2 bg-gray-700 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                errors.name ? 'border-red-500' : 'border-gray-600'
+              }`}
+              placeholder="Your name"
             />
+            {errors.name && (
+              <p className="mt-1 text-sm text-red-500 flex items-center">
+                <FiAlertCircle className="mr-1" /> {errors.name}
+              </p>
+            )}
           </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
-              Email Address *
+              Email Address {errors.email && <span className="text-red-500">*</span>}
             </label>
             <input
               type="email"
@@ -189,9 +284,16 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-              required
+              className={`w-full px-4 py-2 bg-gray-700 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                errors.email ? 'border-red-500' : 'border-gray-600'
+              }`}
+              placeholder="your.email@example.com"
             />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-500 flex items-center">
+                <FiAlertCircle className="mr-1" /> {errors.email}
+              </p>
+            )}
           </div>
 
           {!isSalesInquiry && (
@@ -222,7 +324,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
 
           <div>
             <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
-              {isSalesInquiry ? 'Tell us about your project' : 'Your Message'} *
+              {isSalesInquiry ? 'Tell us about your project' : 'Your Message'} {errors.message && <span className="text-red-500">*</span>}
             </label>
             <textarea
               id="message"
@@ -230,30 +332,58 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
-              required
+              className={`w-full px-4 py-2 bg-gray-700 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent ${
+                errors.message ? 'border-red-500' : 'border-gray-600'
+              }`}
+              placeholder="Your message..."
             />
+            {errors.message && (
+              <p className="mt-1 text-sm text-red-500 flex items-center">
+                <FiAlertCircle className="mr-1" /> {errors.message}
+              </p>
+            )}
           </div>
 
+          <div className="mb-6">
+            <HCaptcha
+              sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
+              onVerify={onCaptchaVerify}
+              ref={captchaRef}
+            />
+            {errors.captcha && (
+              <p className="mt-2 text-sm text-red-500 flex items-center">
+                <FiAlertCircle className="mr-1" /> {errors.captcha}
+              </p>
+            )}
+          </div>
+
+          {errors.form && (
+            <div className="mb-4 p-3 bg-red-900/30 border border-red-500 rounded-md">
+              <p className="text-red-400 text-sm">{errors.form}</p>
+            </div>
+          )}
+          
           <div className="pt-2">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 px-6 rounded-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              className={`w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-md transition-colors ${
+                isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+              }`}
             >
               {isSubmitting ? (
-                <>
+                <span className="flex items-center justify-center">
                   <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
                   Sending...
-                </>
+                </span>
               ) : (
-                <>
-                  <FiSend className="w-4 h-4" />
-                  <span>{isSalesInquiry ? 'Send Sales Inquiry' : 'Send Message'}</span>
-                </>
+                <span className="flex items-center justify-center">
+                  <FiSend className="mr-2" />
+                  {isSalesInquiry ? 'Send Inquiry' : 'Send Message'}
+                </span>
               )}
             </button>
           </div>

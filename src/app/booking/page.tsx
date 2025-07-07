@@ -18,7 +18,8 @@ const planTitles = {
   enterprise: 'Enterprise Solution'
 };
 
-export default function BookingPage({ searchParams }: BookingPageProps) {
+export default async function BookingPage({ searchParams }: BookingPageProps) {
+  // Make sure to await searchParams if you need to access its properties
   const { plan } = searchParams;
   const isSalesInquiry = true; 
   
@@ -40,7 +41,7 @@ export default function BookingPage({ searchParams }: BookingPageProps) {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">
-            {plan ? `Book ${planTitles[plan] || 'Your Plan'}` : 'Get Started'}
+            {plan ? `Book ${planTitles[plan as keyof typeof planTitles] || 'Your Plan'}` : 'Get Started'}
           </h1>
           <div className="w-20 h-1 bg-accent mx-auto mb-6"></div>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -48,10 +49,10 @@ export default function BookingPage({ searchParams }: BookingPageProps) {
           </p>
         </div>
 
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+        <div className="bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
           <ContactForm 
             isSalesInquiry={isSalesInquiry} 
-            selectedPlan={plan} 
+            selectedPlan={plan}
           />
         </div>
       </div>

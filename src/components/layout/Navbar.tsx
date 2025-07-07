@@ -85,6 +85,7 @@ const Navbar = () => {
           <Link href="/" className="flex items-center space-x-2">
             <span className="text-accent text-2xl font-bold">MEGAS</span>
             <span className="text-white text-2xl font-light">TECH</span>
+            <span className="text-accent text-xl font-bold">INC.</span>
           </Link>
 
           {/* Desktop Navigation */}
