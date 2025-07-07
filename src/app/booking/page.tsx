@@ -10,19 +10,14 @@ type SearchParams = {
   plan?: 'starter' | 'professional' | 'enterprise';
 };
 
-type BookingPageProps = {
-  searchParams: SearchParams;
-};
-
 const planTitles = {
   starter: 'Starter Plan',
   professional: 'Professional Plan',
   enterprise: 'Enterprise Solution'
 };
 
-export default async function BookingPage({ searchParams }: BookingPageProps) {
-  // No need to await searchParams as it's already resolved by Next.js
-  const { plan } = searchParams;
+export default async function BookingPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const { plan } = await searchParams;
   const isSalesInquiry = true; 
   
   const getPlanMessage = () => {
