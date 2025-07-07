@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiTool, FiCode, FiServer, FiDatabase, FiSmartphone, FiCloud, FiShoppingCart, FiArrowRight } from 'react-icons/fi';
+import { FiTool, FiCode, FiServer, FiDatabase, FiSmartphone, FiCloud, FiShoppingCart, FiArrowRight, FiMail } from 'react-icons/fi';
 import Link from 'next/link';
 
 const services = [
@@ -41,6 +41,12 @@ const services = [
     description: 'Secure and affordable domain registration to establish your online presence.',
     icon: <FiDatabase className="w-8 h-8 text-accent-default" />,
     href: '/services/domain-registration',
+  },
+  {
+    title: 'Email Plans',
+    description: 'Affordable and reliable email hosting solutions to ensure your website is always accessible.',
+    icon: <FiMail className="w-8 h-8 text-accent-default" />,
+    href: '/services/email-plans',
   },
   {
     title: 'E-Commerce Solutions',

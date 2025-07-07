@@ -8,7 +8,7 @@ const projects = [
     id: 1,
     title: 'E-commerce Platform',
     description: 'A full-featured e-commerce platform with product catalog, cart, and payment integration.',
-    tags: ['React', 'Express.js', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
+    tags: ['React', 'Express.js', 'Node.js', 'MongoDB', 'Paypal', 'Tailwind CSS'],
     github: '#',
     demo: 'https://www.vestraversa.com',
     link: '/projects/ecommerce-platform'

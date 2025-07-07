@@ -12,7 +12,7 @@ const projects = [
   {
     title: "E-Commerce Platform",
     description: "A scalable online store with seamless checkout and modern UI.",
-    image: "/vestraversa.png",
+    image: "/vestraversa.jpg",
     link: "/projects/ecommerce-platform"
   },
   {
@@ -24,7 +24,7 @@ const projects = [
   {
     title: "Construction Website",
     description: "A construction website with interactive animations and responsive design.",
-    image: "/dermolahu.png",
+    image: "/dermolahu.jpg",
     link: "/projects/construction"
   }
 ];

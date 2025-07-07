@@ -9,9 +9,9 @@ const projects = [
 		id: 'ecommerce-platform',
 		title: 'Vestraversa Fashion Hub',
 		description: 'A scalable online store with seamless checkout and modern UI.',
-		image: '/vestraversa.png',
+		image: '/vestraversa.jpg',
 		details: 'This e-commerce platform features a complete shopping experience with product listings, cart functionality, secure checkout, and order management. Built with modern web technologies for optimal performance and user experience.',
-		technologies: ['React', 'Express.js', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
+		technologies: ['React', 'Express.js', 'Node.js', 'MongoDB', 'Paypal', 'Tailwind CSS'],
 		github: 'https://github.com/JosephSarpey/VESTRA-VERSA',
 		demo: 'https://www.vestraversa.com'
 	},
@@ -29,7 +29,7 @@ const projects = [
 		id: 'construction',
 		title: 'Dermolahu Draughtmanship Construction Works',
 		description: 'A construction website with interactive animations and responsive design.',
-		image: '/dermolahu.png',
+		image: '/dermolahu.jpg',
 		details: 'A professional construction company website showcasing services, completed projects, and client testimonials. Features include project galleries, service details, and contact forms.',
 		technologies: ['React', 'Framer Motion', 'Tailwind CSS', 'Formik'],
 		github: 'https://github.com/JosephSarpey/Dermolahu-draughtmanship-construction-works',
@@ -83,13 +83,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
 					<h1 className="text-4xl font-bold text-white mb-4">{project.title}</h1>
 					<p className="text-xl text-gray-300 mb-8">{project.description}</p>
 					
-					<div className="relative w-full h-96 rounded-xl overflow-hidden mb-8">
+					<div className="relative w-full h-auto aspect-video rounded-xl overflow-hidden mb-8">
 						<Image
 							src={project.image}
 							alt={project.title}
 							fill
-							className="object-cover"
+							className="object-contain"
 							priority
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
 						/>
 					</div>
 					
