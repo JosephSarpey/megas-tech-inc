@@ -11,7 +11,6 @@ type SearchParams = {
 };
 
 type BookingPageProps = {
-  params: { slug: string };
   searchParams: SearchParams;
 };
 
