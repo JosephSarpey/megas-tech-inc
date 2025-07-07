@@ -6,10 +6,13 @@ export const metadata: Metadata = {
   description: 'Book your selected plan and get started with our services.',
 };
 
+type SearchParams = {
+  plan?: 'starter' | 'professional' | 'enterprise';
+};
+
 type BookingPageProps = {
-  searchParams: {
-    plan?: 'starter' | 'professional' | 'enterprise';
-  };
+  params: { slug: string };
+  searchParams: SearchParams;
 };
 
 const planTitles = {
@@ -19,7 +22,7 @@ const planTitles = {
 };
 
 export default async function BookingPage({ searchParams }: BookingPageProps) {
-  // Make sure to await searchParams if you need to access its properties
+  // No need to await searchParams as it's already resolved by Next.js
   const { plan } = searchParams;
   const isSalesInquiry = true; 
   
