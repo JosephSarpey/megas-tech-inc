@@ -18,14 +18,26 @@ const fadeInUp: Variants = {
 
 type ContactFormProps = {
   isSalesInquiry?: boolean;
+  selectedPlan?: 'starter' | 'professional' | 'enterprise';
 };
 
-export default function ContactForm({ isSalesInquiry = false }: ContactFormProps) {
+export default function ContactForm({ isSalesInquiry = false, selectedPlan }: ContactFormProps) {
+  const getDefaultMessage = () => {
+    if (isSalesInquiry && selectedPlan) {
+      return `I'm interested in the ${selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)} plan. ` + 
+             'Please provide more information about the next steps.';
+    }
+    return isSalesInquiry 
+      ? "I'm interested in learning more about your services."
+      : '';
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: isSalesInquiry ? 'Sales Inquiry' : '',
-    message: isSalesInquiry ? 'I\'m interested in learning more about your services.' : '',
+    message: getDefaultMessage(),
+    plan: selectedPlan || ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -38,12 +50,36 @@ export default function ContactForm({ isSalesInquiry = false }: ContactFormProps
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Add your form submission logic here
-    console.log('Form submitted:', formData);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSuccess(true);
-    setIsSubmitting(false);
+  
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        setIsSuccess(true);
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: isSalesInquiry ? 'Sales Inquiry' : '',
+          message: getDefaultMessage(),
+          plan: selectedPlan || ''
+        });
+      } else {
+        const error = await response.json();
+        throw new Error(error.message || 'Something went wrong');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSuccess) {
@@ -172,6 +208,15 @@ export default function ContactForm({ isSalesInquiry = false }: ContactFormProps
                 className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                 required
               />
+            </div>
+          )}
+
+          {selectedPlan && (
+            <div className="mb-4 p-4 bg-gray-700/50 rounded-lg border border-accent/20">
+              <p className="text-sm text-gray-300">
+                <span className="font-medium">Selected Plan:</span> {selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)}
+              </p>
+              <input type="hidden" name="plan" value={selectedPlan} />
             </div>
           )}
 

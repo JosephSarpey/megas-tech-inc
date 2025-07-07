@@ -25,7 +25,7 @@ const Pricing = () => {
         '1 Month Support',
       ],
       cta: 'Get Started',
-      href: '/contact?plan=starter',
+      href: '/booking?plan=starter',
     },
     {
       name: 'Professional',
@@ -38,10 +38,10 @@ const Pricing = () => {
         'Advanced SEO',
         'Content Management System',
         '3 Months Support',
-        'Google Analytics',
+        'Admin Analytics',
       ],
       cta: 'Get Professional',
-      href: '/contact?plan=professional',
+      href: '/booking?plan=professional',
     },
     {
       name: 'Enterprise',
@@ -57,7 +57,7 @@ const Pricing = () => {
         'Custom Development',
       ],
       cta: 'Contact Sales',
-      href: '/contact?plan=enterprise',
+      href: '/booking?plan=enterprise',
     },
   ];
 
@@ -144,7 +144,7 @@ const Pricing = () => {
             </div>
             <div className="mt-4 md:mt-0">
               <Link
-                href="/contact"
+                href="/contact/sales"
                 className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent/90"
               >
                 Contact Sales
@@ -163,7 +163,7 @@ const Pricing = () => {
               },
               {
                 question: 'Can I upgrade or downgrade later?',
-                answer: 'Absolutely! You can upgrade or downgrade your plan at any time. We&apos;ll prorate the difference.'
+                answer: 'Absolutely! You can upgrade or downgrade your plan at any time. We will corporate the difference.'
               },
               {
                 question: 'Is there a money-back guarantee?',
