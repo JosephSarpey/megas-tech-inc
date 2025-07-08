@@ -166,7 +166,7 @@ const Services = () => {
         <div className="mt-16 text-center">
           <Button
             as="a"
-            href={services[0].href}
+            href="/services"
             variant="accent" 
             size="lg"
             className="group"

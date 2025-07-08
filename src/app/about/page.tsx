@@ -1,33 +1,38 @@
-import { FiUsers, FiTarget, FiAward, FiGlobe, FiCode, FiLayers } from 'react-icons/fi';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FiUsers, FiTarget, FiAward, FiGlobe, FiCode, FiLayers, FiCheckCircle, FiSearch } from 'react-icons/fi';
 import Image from 'next/image';
+import { AiFillThunderbolt } from 'react-icons/ai';
+import { GiFlyingTarget } from 'react-icons/gi';
+import { LuCodesandbox, LuFileSearch } from 'react-icons/lu';
+import { TbFileAnalytics } from 'react-icons/tb';
 
 const About = () => {
   const stats = [
-    { id: 1, name: 'Projects Completed', value: '50+', icon: FiLayers },
-    { id: 2, name: 'Happy Clients', value: '40+', icon: FiUsers },
-    { id: 3, name: 'Years Experience', value: '5+', icon: FiAward },
+    { id: 1, name: 'Projects Completed', value: '10+', icon: FiLayers },
+    { id: 2, name: 'Happy Clients', value: '5+', icon: FiUsers },
+    { id: 3, name: 'Technologies', value: '10+', icon: FiCode },
   ];
 
   const team = [
     {
-      name: 'John Doe',
-      role: 'CEO & Founder',
-      image: '/team/john-doe.jpg',
-      bio: 'John has over 10 years of experience in web development and digital strategy.',
+      name: 'Our Team',
+      role: 'Passionate Innovators',
+      image: '/team/placeholder.jpg',
+      bio: 'A dedicated group of professionals with diverse expertise in technology and business solutions.',
     },
     {
-      name: 'Jane Smith',
-      role: 'Lead Developer',
-      image: '/team/jane-smith.jpg',
-      bio: 'Jane specializes in modern JavaScript frameworks and cloud architecture.',
+      name: 'Our Mission',
+      role: 'Driving Innovation',
+      image: '/team/placeholder.jpg',
+      bio: 'To deliver cutting-edge solutions that help businesses thrive in the digital age.',
     },
     {
-      name: 'Mike Johnson',
-      role: 'UI/UX Designer',
-      image: '/team/mike-johnson.jpg',
-      bio: 'Mike creates beautiful, intuitive interfaces that users love.',
+      name: 'Our Vision',
+      role: 'Shaping the Future',
+      image: '/team/placeholder.jpg',
+      bio: 'To be at the forefront of technological innovation and digital transformation.',
     },
-  ];
+  ]; 
 
   return (
     <div className="bg-white">
@@ -65,7 +70,7 @@ const About = () => {
                 <div className="relative px-8">
                   <div>
                     <div className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-white text-accent">
-                      Since 2018
+                      Established June 2025
                     </div>
                   </div>
                   <blockquote className="mt-8">
@@ -88,14 +93,14 @@ const About = () => {
               </h2>
               <div className="mt-6 text-gray-500 space-y-6">
                 <p className="text-lg">
-                  Founded in 2018, our journey began with a simple idea: to create digital
-                  solutions that make a real difference. What started as a small team of passionate
-                  developers has grown into a full-service digital agency serving clients worldwide.
+                  Founded in June 2025, Megas Tech Inc. is a dynamic startup on a mission to revolutionize 
+                  the digital landscape. Though we&apos;re new to the scene, our team brings together years of 
+                  combined experience in technology, design, and business strategy.
                 </p>
                 <p className="text-lg">
-                  We&apos;ve had the privilege of working with startups, small businesses, and large
-                  enterprises across various industries, helping them navigate the digital landscape
-                  and achieve their business goals.
+                  We&apos;re excited to work with forward-thinking businesses of all sizes, helping them navigate 
+                  the digital world with innovative solutions tailored to their unique needs. Our fresh 
+                  perspective and passion for technology drive us to deliver exceptional results for our clients.
                 </p>
               </div>
 
@@ -181,8 +186,8 @@ const About = () => {
         </div>
       </div>
 
-      {/* Team Section */}
-      <div className="bg-white py-16 sm:py-24">
+      {/* Team Section - Commented out for future use */}
+      {/* <div className="bg-white py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -218,29 +223,103 @@ const About = () => {
                     <p className="mt-3 text-base text-gray-600 text-center">
                       {person.bio}
                     </p>
-                    <div className="mt-6 flex justify-center space-x-6">
-                      {['#', '#', '#'].map((item, index) => (
-                        <a key={index} href={item} className="text-gray-400 hover:text-gray-500">
-                          <span className="sr-only">LinkedIn</span>
-                          <svg
-                            className="h-6 w-6"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </a>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div> */}
+
+      {/* Our Approach Section */}
+      <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Our Approach
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
+              How we turn your ideas into reality
+            </p>
+          </div>
+          <div className="mt-12">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: 'Discovery & Strategy',
+                  description: 'We start by deeply understanding your business goals and challenges to craft a tailored strategy.',
+                  icon: <LuFileSearch />
+                },
+                {
+                  title: 'Design & Development',
+                  description: 'Our team brings your vision to life with clean, efficient code and intuitive design.',
+                  icon: <LuCodesandbox />
+                },
+                {
+                  title: 'Deployment & Growth',
+                  description: 'We don\'t just build and leave - we ensure your solution grows with your business.',
+                  icon: <TbFileAnalytics />
+                }
+              ].map((step, index) => (
+                <div key={index} className="pt-6">
+                  <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                    <div className="-mt-6 text-4xl">
+                      {step.icon}
+                    </div>
+                    <h3 className="mt-6 text-lg font-medium text-gray-900">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-base text-gray-600">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose a Startup */}
+      <div className="relative bg-gray-50">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gray-100" />
+        </div>
+        <div className="relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              Why Choose a Startup?
+            </h2>
+            <p className="mt-4 text-xl text-gray-600">
+              Fresh perspectives, agile approach, and dedicated focus on your success
+            </p>
+          </div>
+          <div className="mt-10">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: 'Agile & Flexible',
+                  description: 'As a startup, we adapt quickly to your needs and market changes, ensuring you get the most effective solutions.',
+                  icon: <AiFillThunderbolt />,
+                },
+                {
+                  title: 'Cutting-Edge',
+                  description: 'We leverage the latest technologies and methodologies to deliver innovative solutions that give you a competitive edge.',
+                  icon: <FiCheckCircle />,
+                },
+                {
+                  title: 'Personalized Service',
+                  description: 'You\'re not just another client. We provide dedicated attention and tailor our services to your specific goals.',
+                  icon: <GiFlyingTarget />,
+                },
+              ].map((feature, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
