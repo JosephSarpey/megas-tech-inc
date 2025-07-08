@@ -42,7 +42,7 @@ const Footer = () => {
         { name: 'Careers', href: '/careers' },
         { name: 'Blog', href: '/blog' },
         { name: 'Contact', href: '/contact' },
-        { name: 'FAQ', href: '/faq' },
+        { name: 'FAQs', href: '/faq' },
       ],
     },
     {

@@ -20,6 +20,7 @@ const fadeInUp: Variants = {
 type ContactFormProps = {
   isSalesInquiry?: boolean;
   selectedPlan?: 'starter' | 'professional' | 'enterprise';
+  serviceName?: string;
 };
 
 type FormErrors = {
@@ -30,13 +31,14 @@ type FormErrors = {
   form?: string;
 };
 
-export default function ContactForm({ isSalesInquiry = false, selectedPlan }: ContactFormProps) {
+export default function ContactForm({ isSalesInquiry = false, selectedPlan, serviceName }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: isSalesInquiry ? 'Sales Inquiry' : '',
     message: getDefaultMessage(),
     plan: selectedPlan || '',
+    service: serviceName || '',
     token: ''
   });
   
@@ -46,13 +48,28 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
   const captchaRef = useRef<HCaptcha>(null);
 
   function getDefaultMessage() {
-    if (isSalesInquiry && selectedPlan) {
-      return `I'm interested in the ${selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)} plan. ` + 
-             'Please provide more information about the next steps.';
+    if (isSalesInquiry) {
+      if (selectedPlan && serviceName) {
+        const formattedService = serviceName.split('-').map(word => 
+          word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+        const planName = selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1);
+        return `I'm interested in the ${formattedService} - ${planName} plan. ` +
+               'Please provide more information about the next steps.';
+      } else if (selectedPlan) {
+        const planName = selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1);
+        return `I'm interested in the ${planName} plan. ` +
+               'Please provide more information about the next steps.';
+      } else if (serviceName) {
+        const formattedService = serviceName.split('-').map(word => 
+          word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+        return `I'm interested in your ${formattedService} service. ` +
+               'Please provide more information.';
+      }
+      return "I'm interested in learning more about your services.";
     }
-    return isSalesInquiry 
-      ? "I'm interested in learning more about your services."
-      : '';
+    return '';
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -154,6 +171,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan }: Co
         subject: isSalesInquiry ? 'Sales Inquiry' : '',
         message: getDefaultMessage(),
         plan: selectedPlan || '',
+        service: serviceName || '',
         token: ''
       });
       

@@ -256,7 +256,7 @@ const Testimonials = () => {
         <div className="text-center mt-16">
           <Button
             as="a"
-            href="#contact"
+            href="/testimonials"
             variant="accent"
             size="lg"
             className="mx-auto"

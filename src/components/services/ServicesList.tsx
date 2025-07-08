@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiTool, FiCode, FiServer, FiDatabase, FiSmartphone, FiCloud, FiShoppingCart, FiArrowRight, FiMail } from 'react-icons/fi';
+import { FiTool, FiCode, FiServer, FiDatabase, FiCloud, FiShoppingCart, FiArrowRight, FiMail, FiFileText, FiPieChart } from 'react-icons/fi';
 import Link from 'next/link';
 
 const services = [
@@ -53,6 +52,18 @@ const services = [
     description: 'Secure and scalable online stores that convert visitors into customers.',
     icon: <FiShoppingCart className="w-8 h-8 text-accent-default" />,
     href: '/services/e-commerce',
+  },
+  {
+    title: 'Content Management',
+    description: 'Effortless content creation and management for your website.',
+    icon: <FiFileText className="w-8 h-8 text-accent-default" />,
+    href: '/services/content-management',
+  },
+  {
+    title: 'Graphic Design',
+    description: 'Professional and modern graphic design for your brand.',
+    icon: <FiPieChart className="w-8 h-8 text-accent-default" />,
+    href: '/services/graphic-design',
   }
 ]; 
 

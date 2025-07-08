@@ -11,7 +11,7 @@ type PricingTier = {
   cta: string;
   href: string;
   billing?: string;
-  isPromo?: boolean; // Flag to show promotional badge
+  isPromo?: boolean; // Flag to show promotional badge 
 };
 
 type ServicePricing = {
@@ -21,7 +21,7 @@ type ServicePricing = {
 };
 
 const Pricing = () => {
-  const isPromoActive = true; // You can control this with a feature flag or time-based
+  const isPromoActive = true; 
 
   const services: ServicePricing[] = [
     {
@@ -419,6 +419,121 @@ const Pricing = () => {
           cta: 'Get Premium',
           href: '/booking?service=maintenance&plan=premium',
           isPromo: isPromoActive,
+        },
+      ],
+    },
+    {
+      title: 'Graphic Design',
+      description: 'Professional visual design services for digital and print media',
+      tiers: [
+        {
+          name: 'Starter',
+          price: isPromoActive ? '$299' : '$499',
+          originalPrice: isPromoActive ? '$499' : undefined,
+          description: 'Perfect for small businesses and startups',
+          features: [
+            '2 Design Concepts',
+            '2 Revisions',
+            'Logo Design',
+            'Business Card Design',
+            'Social Media Kit (3 platforms)',
+            '1 Week Delivery',
+          ],
+          cta: 'Get Started',
+          href: '/booking?service=graphic-design&plan=starter',
+          isPromo: isPromoActive,
+        },
+        {
+          name: 'Professional',
+          price: isPromoActive ? '$799' : '$1,299',
+          originalPrice: isPromoActive ? '$1,299' : undefined,
+          description: 'For growing businesses with ongoing design needs',
+          popular: true,
+          features: [
+            '4 Design Concepts',
+            '4 Revisions',
+            'Complete Brand Identity',
+            'Print & Digital Assets',
+            'Social Media Kit (5 platforms)',
+            'Email Template Design',
+            '2 Weeks Delivery',
+          ],
+          cta: 'Get Professional',
+          href: '/booking?service=graphic-design&plan=professional',
+          isPromo: isPromoActive,
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          description: 'For large-scale design needs and ongoing support',
+          features: [
+            'Unlimited Design Concepts',
+            'Unlimited Revisions',
+            'Complete Brand Guidelines',
+            'Print & Digital Assets',
+            'Social Media Management',
+            'Website Graphics',
+            'Monthly Retainer Available',
+          ],
+          cta: 'Contact Sales',
+          href: '/booking?service=graphic-design&plan=enterprise',
+        },
+      ],
+    },
+    {
+      title: 'Content Management',
+      description: 'Professional content creation and management services',
+      tiers: [
+        {
+          name: 'Basic',
+          price: isPromoActive ? '$199' : '$349',
+          originalPrice: isPromoActive ? '$349' : undefined,
+          description: 'For small websites and blogs',
+          features: [
+            '5 Pages Content Creation',
+            'Basic SEO Optimization',
+            '1 Blog Post',
+            'Image Selection',
+            '1 Round of Revisions',
+          ],
+          cta: 'Get Started',
+          href: '/booking?service=content&plan=basic',
+          isPromo: isPromoActive,
+        },
+        {
+          name: 'Professional',
+          price: isPromoActive ? '$499' : '$799',
+          originalPrice: isPromoActive ? '$799' : undefined,
+          description: 'For businesses with regular content needs',
+          popular: true,
+          features: [
+            'Up to 15 Pages Content',
+            'Advanced SEO Optimization',
+            '4 Blog Posts/Month',
+            'Image Optimization',
+            'Content Calendar',
+            '2 Rounds of Revisions',
+            'Monthly Analytics Report',
+          ],
+          cta: 'Get Professional',
+          href: '/booking?service=content&plan=professional',
+          isPromo: isPromoActive,
+        },
+        {
+          name: 'Enterprise',
+          price: 'Custom',
+          description: 'For large-scale content strategy and management',
+          features: [
+            'Unlimited Pages',
+            'Comprehensive SEO Strategy',
+            '8+ Blog Posts/Month',
+            'Content Strategy Development',
+            'Social Media Integration',
+            'Custom Graphics',
+            'Dedicated Content Manager',
+          ],
+          cta: 'Contact Sales',
+          href: '/booking?service=content&plan=enterprise',
         },
       ],
     },

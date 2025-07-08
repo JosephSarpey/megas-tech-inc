@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 
 type SearchParams = {
   plan?: 'starter' | 'professional' | 'enterprise';
+  service?: string;
 };
 
 const planTitles = {
@@ -17,20 +18,21 @@ const planTitles = {
 };
 
 export default async function BookingPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
-  const { plan } = await searchParams;
+  const { plan, service } = await searchParams;
   const isSalesInquiry = true; 
   
   const getPlanMessage = () => {
-    switch (plan) {
-      case 'starter':
-        return 'You\'re signing up for our Starter Plan. Let us know more about your project!';
-      case 'professional':
-        return 'You\'ve selected our Professional Plan. Share some details about your business needs.';
-      case 'enterprise':
-        return 'Interested in our Enterprise Solution? Let\'s discuss your custom requirements.';
-      default:
-        return 'Tell us about your project and we\'ll get back to you shortly.';
+    const serviceName = service ? `${service} ` : '';
+    const planName = plan ? planTitles[plan as keyof typeof planTitles] || plan : '';
+    
+    if (plan && service) {
+      return `You're signing up for our ${serviceName}${planName}. Let us know more about your project!`;
+    } else if (plan) {
+      return `You've selected our ${planName}. Share some details about your business needs.`;
+    } else if (service) {
+      return `Interested in our ${serviceName}service? Let's discuss your requirements.`;
     }
+    return 'Tell us about your project and we\'ll get back to you shortly.';
   };
 
   return (
@@ -50,6 +52,7 @@ export default async function BookingPage({ searchParams }: { searchParams: Prom
           <ContactForm 
             isSalesInquiry={isSalesInquiry} 
             selectedPlan={plan}
+            serviceName={service}
           />
         </div>
       </div>

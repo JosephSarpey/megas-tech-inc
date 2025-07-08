@@ -29,7 +29,7 @@ const services = [
     title: 'Maintenance & Support',
     description: 'Ongoing support and maintenance to keep your digital products running smoothly and securely.',
     features: ['Performance Optimization', 'Security Updates', 'Bug Fixes', 'Technical Support'],
-    href: '/services/maintenance-support',
+    href: '/services/maintenance',
   },
   {
     icon: <FiMessageSquare className="w-8 h-8" />,

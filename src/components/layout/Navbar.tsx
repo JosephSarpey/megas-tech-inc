@@ -45,7 +45,7 @@ const Navbar = () => {
     { name: 'About Us', href: '/about', icon: <FiInfo className="w-4 h-4" /> },
     { name: 'Blog', href: '/blog', icon: <FiMessageSquare className="w-4 h-4" /> },
     { name: 'Testimonials', href: '/testimonials', icon: <FiUser className="w-4 h-4" /> },
-    { name: 'FAQ', href: '/faq', icon: <FiHelpCircle className="w-4 h-4" /> },
+    { name: 'FAQs', href: '/faq', icon: <FiHelpCircle className="w-4 h-4" /> },
     { name: 'Careers', href: '/careers', icon: <FiBriefcase className="w-4 h-4" /> },
   ];
 
@@ -192,7 +192,7 @@ const Navbar = () => {
             </div>
             
             <Link
-              href="/contact"
+              href="/pricing"
               className="ml-2 px-6 py-2 bg-accent text-primary font-medium rounded-md hover:bg-accent/90 transition-all duration-200 flex items-center space-x-2"
             >
               <span>Get Started</span>
