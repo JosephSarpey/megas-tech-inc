@@ -131,7 +131,8 @@ const Projects = () => {
           ))}
         </div>
         <div className="mt-16 text-center">
-          <Button 
+          <Button
+            as="a"
             href="/projects" 
             variant="accent" 
             size="lg"

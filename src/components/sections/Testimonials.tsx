@@ -21,33 +21,33 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: 'John Doe',
-    role: 'CEO at TechCorp',
-    content: 'Working with MEGAS TECH was a game-changer for our business. Their innovative solutions helped us increase our online presence significantly.',
+    name: 'Mr.Ebenezer Amakeh',
+    role: 'CEO at Vestra Versa',
+    content: 'Working with MEGAS TECH INC. was a game-changer for our business. Their innovative solutions helped us increase our online presence significantly.',
     rating: 5,
     icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
   },
   {
     id: 2,
-    name: 'Jane Smith',
-    role: 'Marketing Director',
-    content: 'The team at MEGAS TECH delivered beyond our expectations. Their attention to detail and technical expertise is unmatched in the industry.',
+    name: 'Mr. Theophilus Arthur',
+    role: 'CEO of Teebel Global Travel Consultancy',
+    content: 'The team at MEGAS TECH INC. delivered beyond our expectations. Their attention to detail and technical expertise is unmatched in the industry.',
     rating: 5,
     icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
   },
   {
     id: 3,
-    name: 'Michael Johnson',
-    role: 'Product Manager',
+    name: 'Miss Elizabeth Obeng',
+    role: 'Assistant Managing Director',
     content: 'Their development team is incredibly responsive and professional. They transformed our ideas into a beautiful, functional product.',
     rating: 4,
     icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
   },
   {
     id: 4,
-    name: 'Sarah Williams',
-    role: 'Founder & CEO',
-    content: 'MEGAS TECH built our e-commerce platform from scratch. The results have been outstanding, with a 200% increase in sales.',
+    name: 'Mr. Dermolahu',
+    role: 'Founder & CEO of Dermolahu Draughtmanship & Construction Works',
+    content: 'MEGAS TECH INC. built our e-commerce platform from scratch. The results have been outstanding, with a significantly huge increase in sales.',
     rating: 5,
     icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
   }

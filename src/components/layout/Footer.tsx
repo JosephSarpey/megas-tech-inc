@@ -42,6 +42,7 @@ const Footer = () => {
         { name: 'Careers', href: '/careers' },
         { name: 'Blog', href: '/blog' },
         { name: 'Contact', href: '/contact' },
+        { name: 'FAQ', href: '/faq' },
       ],
     },
     {
@@ -72,7 +73,7 @@ const Footer = () => {
             <div className="flex items-center space-x-2">
               <span className="text-accent text-2xl font-bold">MEGAS</span>
               <span className="text-white text-2xl font-light">TECH</span>
-              <span className="text-accent text-xl font-bold">INC</span>
+              <span className="text-accent text-xl font-bold">INC.</span>
             </div>
             <p className="text-gray-400">
               Transforming ideas into digital reality with cutting-edge technology solutions.

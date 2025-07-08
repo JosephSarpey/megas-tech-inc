@@ -471,7 +471,7 @@ const Pricing = () => {
                   {tier.isPromo && !tier.popular && (
                     <div className="absolute -top-3 right-4">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                        <FiTag className="mr-1 h-3 w-3" /> Limited Time
+                        <FiTag className="mr-1 h-3 w-3" /> Limited Time Offer
                       </span>
                     </div>
                   )}

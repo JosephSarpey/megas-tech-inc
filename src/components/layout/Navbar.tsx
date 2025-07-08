@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { FiMenu, FiX, FiCode, FiLayers, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo } from 'react-icons/fi';
+import { FiMenu, FiX, FiCode, FiLayers, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo, FiHelpCircle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
@@ -44,6 +44,9 @@ const Navbar = () => {
     { name: 'Projects', href: '/projects', icon: <FiCode className="w-5 h-5" /> },
     { name: 'About Us', href: '/about', icon: <FiInfo className="w-4 h-4" /> },
     { name: 'Blog', href: '/blog', icon: <FiMessageSquare className="w-4 h-4" /> },
+    { name: 'Testimonials', href: '/testimonials', icon: <FiUser className="w-4 h-4" /> },
+    { name: 'FAQ', href: '/faq', icon: <FiHelpCircle className="w-4 h-4" /> },
+    { name: 'Careers', href: '/careers', icon: <FiBriefcase className="w-4 h-4" /> },
   ];
 
   useEffect(() => {

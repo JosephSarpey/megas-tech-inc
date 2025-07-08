@@ -23,10 +23,10 @@ const config = {
           dark: '#000a12',
         },
         accent: {
-          DEFAULT: '#00FF00',
-          light: '#76FF03',
-          dark: '#64DD17',
-          foreground: '#000000', 
+          DEFAULT: '#10B981',  // emerald-500 - Good contrast on white
+          light: '#34D399',   // emerald-400 - Lighter variant
+          dark: '#059669',    // emerald-600 - Darker variant for hover states
+          foreground: '#FFFFFF', // White text for better contrast on colored buttons
         },
         background: {
           DEFAULT: '#FFFFFF',

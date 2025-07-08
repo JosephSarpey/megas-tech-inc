@@ -120,6 +120,7 @@ export default function Home() {
             
             <div ref={ctaRef} className="flex flex-col sm:flex-row justify-center gap-4 relative z-20">
               <Button 
+                as="a"
                 href="/contact" 
                 variant="accent" 
                 size="lg"

@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FiCode, FiLayers, FiTool, FiMessageSquare, FiArrowRight } from 'react-icons/fi';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,24 +15,28 @@ const services = [
     title: 'Web Development',
     description: 'Custom web applications built with modern technologies to deliver exceptional user experiences and robust functionality.',
     features: ['React/Next.js', 'Node.js', 'RESTful APIs', 'Database Design'],
+    href: '/services/web-development',
   },
   {
     icon: <FiLayers className="w-8 h-8" />,
     title: 'UI/UX Design',
     description: 'Beautiful, intuitive interfaces designed with the user in mind to drive engagement and conversions.',
     features: ['User Research', 'Wireframing', 'Prototyping', 'UI Development'],
+    href: '/services/ui-ux-design',
   },
   {
     icon: <FiTool className="w-8 h-8" />,
     title: 'Maintenance & Support',
     description: 'Ongoing support and maintenance to keep your digital products running smoothly and securely.',
     features: ['Performance Optimization', 'Security Updates', 'Bug Fixes', 'Technical Support'],
+    href: '/services/maintenance-support',
   },
   {
     icon: <FiMessageSquare className="w-8 h-8" />,
     title: 'Tech Consulting',
     description: 'Expert guidance to help you make informed technology decisions for your business.',
     features: ['Technology Audit', 'Solution Architecture', 'Digital Strategy', 'Team Training'],
+    href: '/services/tech-consulting',
   },
 ];
 
@@ -112,54 +117,56 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <div
+            <Link 
               key={service.title}
-              ref={el => {
-                if (el) cardsRef.current[index] = el;
-              }}
-              className="group relative bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:scale-105 hover:shadow-accent/10 overflow-hidden"
+              href={service.href}
+              className="block group"
+              aria-label={`View ${service.title} service`}
             >
-              {/* Hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              {/* Icon */}
-              <div className="w-16 h-16 flex items-center justify-center bg-accent/10 text-accent rounded-xl mb-6 relative z-10">
-                {service.icon}
-              </div>
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                <p className="text-gray-300 mb-4">{service.description}</p>
+              <div
+                ref={el => {
+                  if (el) cardsRef.current[index] = el;
+                }}
+                className="h-full relative bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:scale-105 hover:shadow-accent/10 overflow-hidden"
+              >
+                {/* Hover effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center">
-                      <svg className="w-4 h-4 text-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-sm text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Icon */}
+                <div className="w-16 h-16 flex items-center justify-center bg-accent/10 text-accent rounded-xl mb-6 relative z-10">
+                  {service.icon}
+                </div>
                 
-                <Button 
-                  href="/services" 
-                  variant="ghost" 
-                  size="sm"
-                  className="group-hover:text-accent group-hover:pl-1 transition-all duration-300"
-                >
-                  Learn more
-                  <FiArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
+                  <p className="text-gray-300 mb-4">{service.description}</p>
+                  
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center">
+                        <svg className="w-4 h-4 text-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-sm text-gray-300">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="inline-flex items-center text-accent text-sm font-medium group-hover:underline">
+                    Learn more
+                    <FiArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         <div className="mt-16 text-center">
-          <Button 
-            href="/services" 
+          <Button
+            as="a"
+            href={services[0].href}
             variant="accent" 
             size="lg"
             className="group"
