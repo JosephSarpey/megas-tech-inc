@@ -362,17 +362,24 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             )}
           </div>
 
-          <div className="mb-6">
-            <HCaptcha
-              sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
-              onVerify={onCaptchaVerify}
-              ref={captchaRef}
-            />
-            {errors.captcha && (
-              <p className="mt-2 text-sm text-red-500 flex items-center">
-                <FiAlertCircle className="mr-1" /> {errors.captcha}
-              </p>
-            )}
+          <div className="mt-6 relative" style={{ transform: 'translateZ(0)' }}>
+            <div 
+              className="w-full overflow-visible" 
+              style={{ 
+                minHeight: '78px',
+                transform: 'scale(0.9)',
+                transformOrigin: '0 0'
+              }}
+            >
+              <HCaptcha
+                sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
+                onVerify={onCaptchaVerify}
+                ref={captchaRef}
+              />
+              {errors.captcha && (
+                <p className="mt-1 text-sm text-red-400">{errors.captcha}</p>
+              )}
+            </div>
           </div>
 
           {errors.form && (

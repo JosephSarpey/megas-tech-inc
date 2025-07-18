@@ -9,26 +9,28 @@ export const metadata: Metadata = {
 
 export default function SalesContact() {
   return (
-    <div className="min-h-screen bg-gray-900 pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Sales Inquiry</h1>
-          <div className="w-20 h-1 bg-accent mx-auto mb-6"></div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gray-900 pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="max-w-4xl mx-auto relative">
+        <div className="text-center mb-10 md:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">Sales Inquiry</h1>
+          <div className="w-16 sm:w-20 h-1 bg-accent mx-auto mb-4 sm:mb-6"></div>
+          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto px-2">
             Ready to take your business to the next level? Our sales team is here to help you find the perfect solution.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50">
-            <h2 className="text-2xl font-bold mb-6 text-accent">Get in Touch</h2>
-            <p className="mb-6 text-gray-300">
+        <div className="space-y-8">
+          <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-5 sm:p-8 border border-gray-700/50 overflow-hidden">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-accent">Get in Touch</h2>
+            <p className="mb-5 sm:mb-6 text-gray-300 text-sm sm:text-base">
               Fill out the form and one of our sales representatives will contact you within 24 hours to discuss your project requirements.
             </p>
-            <ContactForm isSalesInquiry={true} />
+            <div className="relative">
+              <ContactForm isSalesInquiry={true} />
+            </div>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700/50">
               <h3 className="text-xl font-semibold mb-6 text-accent flex items-center">
                 <FiCheckCircle className="mr-2 text-green-500" />

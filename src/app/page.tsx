@@ -11,6 +11,11 @@ import Projects from '@/components/sections/Projects';
 import BackToTop from '@/components/ui/BackToTop';
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
+import { Swiper as SwiperType } from 'swiper';
+import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +24,14 @@ export default function Home() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<SwiperRef>(null);
+
+  // Array of background images for the carousel
+  const heroImages = [
+    '/hero-bg-1.jpeg',
+    '/hero-bg-2.jpeg',
+    '/hero-bg-3.webp',
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -85,11 +98,44 @@ export default function Home() {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative flex items-center justify-center min-h-screen pt-16 -mt-16"
+        className="relative flex items-center justify-center min-h-screen pt-16 -mt-16 overflow-hidden"
       >
-        {/* Animated Background - Extend to full viewport */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary to-secondary opacity-90"></div>
+        {/* Background Carousel */}
+        <div className="absolute inset-0 -z-10">
+          <Swiper
+            ref={swiperRef}
+            modules={[Autoplay, EffectFade]}
+            effect="fade"
+            loop={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            speed={1000}
+            className="w-full h-full"
+          >
+            {heroImages.map((image, index) => (
+              <SwiperSlide key={index} className="relative w-full h-full">
+                <div 
+                  className="absolute inset-0 w-full h-full"
+                  style={{
+                    backgroundImage: `url(${image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    width: '100%',
+                    height: '100%',
+                    transform: 'translateZ(0)' // Force GPU acceleration
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          
+          {/* Overlay elements */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/30 to-secondary/30"></div>
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent"></div>
           

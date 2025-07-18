@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
@@ -70,10 +71,16 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <span className="text-accent text-2xl font-bold">MEGAS</span>
-              <span className="text-white text-2xl font-light">TECH</span>
-              <span className="text-accent text-xl font-bold">INC.</span>
+            <div className="flex items-center">
+              <Link href="/" className="block">
+                <Image 
+                  src="/Megas logo.jpg" 
+                  alt="MEGAS TECH INC" 
+                  width={180} 
+                  height={50} 
+                  className="h-12 w-auto"
+                />
+              </Link>
             </div>
             <p className="text-gray-400">
               Transforming ideas into digital reality with cutting-edge technology solutions.
@@ -153,6 +160,9 @@ const Footer = () => {
             </Link>
             <Link href="/cookies" className="text-gray-500 hover:text-accent text-sm transition-colors duration-200">
               Cookie Policy
+            </Link>
+            <Link href="/faq" className="text-gray-500 hover:text-accent text-sm transition-colors duration-200">
+              FAQs
             </Link>
           </div>
         </div>

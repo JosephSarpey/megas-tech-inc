@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FiMenu, FiX, FiCode, FiLayers, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo, FiHelpCircle, FiBriefcase, FiUser } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -85,10 +86,15 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-accent text-2xl font-bold">MEGAS</span>
-            <span className="text-white text-2xl font-light">TECH</span>
-            <span className="text-accent text-xl font-bold">INC.</span>
+          <Link href="/" className="flex items-center h-8">
+            <Image 
+              src="/Megas logo.jpg" 
+              alt="MEGAS TECH INC" 
+              width={150} 
+              height={40} 
+              className="h-12 w-auto object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
