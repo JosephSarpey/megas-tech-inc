@@ -11,7 +11,6 @@ import Projects from '@/components/sections/Projects';
 import BackToTop from '@/components/ui/BackToTop';
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
-import { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide, SwiperRef } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css';
