@@ -88,7 +88,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center h-8">
             <Image 
-              src="/Megas logo.jpg" 
+              src="/megas_logo.png" 
               alt="MEGAS TECH INC" 
               width={150} 
               height={40} 

@@ -74,7 +74,7 @@ const Footer = () => {
             <div className="flex items-center">
               <Link href="/" className="block">
                 <Image 
-                  src="/Megas logo.jpg" 
+                  src="/megas_logo.png" 
                   alt="MEGAS TECH INC" 
                   width={180} 
                   height={50} 
