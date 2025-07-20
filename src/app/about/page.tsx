@@ -1,3 +1,5 @@
+"use client";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FiUsers, FiTarget, FiAward, FiGlobe, FiCode, FiLayers, FiCheckCircle, FiSearch } from 'react-icons/fi';
 import Image from 'next/image';
@@ -5,8 +7,14 @@ import { AiFillThunderbolt } from 'react-icons/ai';
 import { GiFlyingTarget } from 'react-icons/gi';
 import { LuCodesandbox, LuFileSearch } from 'react-icons/lu';
 import { TbFileAnalytics } from 'react-icons/tb';
+import { useRef } from 'react';
+import ScrollAnimations from '@/components/animations/ScrollAnimations';
 
 const About = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const teamRef = useRef<HTMLDivElement>(null);
+
   const stats = [
     { id: 1, name: 'Projects Completed', value: '10+', icon: FiLayers },
     { id: 2, name: 'Happy Clients', value: '5+', icon: FiUsers },
@@ -17,38 +25,80 @@ const About = () => {
     {
       name: 'Our Team',
       role: 'Passionate Innovators',
-      image: '/team/placeholder.jpg',
+      image: '/team1.jpg',
       bio: 'A dedicated group of professionals with diverse expertise in technology and business solutions.',
     },
     {
       name: 'Our Mission',
       role: 'Driving Innovation',
-      image: '/team/placeholder.jpg',
+      image: '/team2.jpg',
       bio: 'To deliver cutting-edge solutions that help businesses thrive in the digital age.',
     },
     {
       name: 'Our Vision',
       role: 'Shaping the Future',
-      image: '/team/placeholder.jpg',
+      image: '/team3.jpg',
       bio: 'To be at the forefront of technological innovation and digital transformation.',
     },
   ]; 
 
   return (
     <div className="bg-white">
+      {/* GSAP Animations */}
+      <ScrollAnimations />
+      
       {/* Hero Section */}
-      <div className="relative bg-gray-900">
+      <div ref={heroRef} className="relative bg-gray-900 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gray-500 mix-blend-multiply" aria-hidden="true" />
         </div>
-        <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            About Us
-          </h1>
-          <p className="mt-6 text-xl text-gray-300 max-w-3xl">
-            We&apos;re a team of passionate developers, designers, and strategists dedicated to building
-            exceptional digital experiences.
-          </p>
+        <div className="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+          <div className="relative">
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+              About Us
+            </h1>
+            <p className="mt-6 text-xl text-gray-300 max-w-3xl">
+              We&apos;re a team of passionate developers, designers, and strategists dedicated to building
+              exceptional digital experiences.
+            </p>
+          </div>
+          <div className="mt-12 relative lg:mt-0">
+            <div className="relative mx-auto w-full rounded-lg shadow-lg overflow-hidden">
+              <Image
+                className="w-full h-auto parallax-image"
+                src="/about-hero.jpg"
+                alt="Our team working together"
+                width={600}
+                height={400}
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/30 to-transparent" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      <div ref={statsRef} className="bg-white py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {stats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <div key={stat.id} className="stat-item bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="flex items-center">
+                    <div className="p-3 rounded-lg bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6" aria-hidden="true" />
+                    </div>
+                    <div className="ml-5">
+                      <p className="text-sm font-medium text-gray-500">{stat.name}</p>
+                      <p className="text-3xl font-semibold text-gray-900">{stat.value}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -59,8 +109,8 @@ const About = () => {
             <div className="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20">
               <div className="relative pt-64 pb-10 rounded-2xl shadow-xl overflow-hidden">
                 <Image
-                  className="absolute inset-0 h-full w-full object-cover"
-                  src="/about/office.jpg"
+                  className="absolute inset-0 h-full w-full object-cover parallax-image"
+                  src="/office.webp"
                   alt="Our office"
                   width={500}
                   height={700}
@@ -85,151 +135,69 @@ const About = () => {
               </div>
             </div>
           </div>
-
-          <div className="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0">
-            <div className="pt-12 sm:pt-16 lg:pt-20">
-              <h2 className="text-3xl text-gray-900 font-extrabold tracking-tight sm:text-4xl">
+          <div className="mt-12 sm:mt-16 lg:mt-0">
+            <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20">
+              <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
                 Our Story
               </h2>
-              <div className="mt-6 text-gray-500 space-y-6">
-                <p className="text-lg">
-                  Founded in June 2025, Megas Tech Inc. is a dynamic startup on a mission to revolutionize 
-                  the digital landscape. Though we&apos;re new to the scene, our team brings together years of 
-                  combined experience in technology, design, and business strategy.
+              <div className="mt-6 prose prose-indigo prose-lg text-gray-500 space-y-6">
+                <p>
+                  Founded in 2025, Megas Tech Inc. started with a simple mission: to create
+                  exceptional digital experiences that make a difference. What began as a small
+                  team of passionate technologists has grown into a full-service digital
+                  agency serving clients worldwide.
                 </p>
-                <p className="text-lg">
-                  We&apos;re excited to work with forward-thinking businesses of all sizes, helping them navigate 
-                  the digital world with innovative solutions tailored to their unique needs. Our fresh 
-                  perspective and passion for technology drive us to deliver exceptional results for our clients.
+                <p>
+                  Our journey has been marked by innovation, creativity, and an unwavering
+                  commitment to excellence. We&apos;ve had the privilege of working with startups,
+                  established businesses, and everything in between, helping them navigate the
+                  ever-changing digital landscape.
                 </p>
-              </div>
-
-              <div className="mt-10">
-                <h3 className="text-xl font-medium text-gray-900">Our Mission</h3>
-                <div className="mt-4 flex items-start">
-                  <div className="flex-shrink-0">
-                    <FiTarget className="h-6 w-6 text-accent" aria-hidden="true" />
-                  </div>
-                  <p className="ml-3 text-base text-gray-700">
-                    To empower businesses through innovative technology solutions that drive growth
-                    and create lasting impact.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <h3 className="text-xl font-medium text-gray-900">Our Values</h3>
-                <div className="mt-4 space-y-4">
-                  {[
-                    {
-                      name: 'Innovation',
-                      description:
-                        'We embrace change and constantly seek new ways to solve problems.',
-                      icon: FiCode,
-                    },
-                    {
-                      name: 'Excellence',
-                      description: 'We take pride in delivering high-quality work in everything we do.',
-                      icon: FiAward,
-                    },
-                    {
-                      name: 'Collaboration',
-                      description: 'We believe in the power of teamwork and open communication.',
-                      icon: FiUsers,
-                    },
-                    {
-                      name: 'Integrity',
-                      description: 'We do what we say and stand by our word.',
-                      icon: FiGlobe,
-                    },
-                  ].map((value, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="flex-shrink-0">
-                        <value.icon
-                          className="h-6 w-6 text-accent"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <h4 className="text-base font-medium text-gray-900">{value.name}</h4>
-                        <p className="text-base text-gray-600">{value.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <p>
+                  Today, we continue to push boundaries and challenge the status quo, always
+                  striving to deliver solutions that not only meet but exceed our clients&apos;
+                  expectations.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="bg-gray-50">
-        <div className="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
-              {stats.map((stat) => (
-                <div
-                  key={stat.id}
-                  className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r"
-                >
-                  <dt className="order-2 mt-2 text-lg font-medium text-gray-500">
-                    {stat.name}
-                  </dt>
-                  <dd className="order-1 text-5xl font-extrabold text-accent">
-                    {stat.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </div>
-
-      {/* Team Section - Commented out for future use */}
-      {/* <div className="bg-white py-16 sm:py-24">
+      {/* Team Section */}
+      <div ref={teamRef} className="bg-gray-50 py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Our Team
+              Our Core Values
             </h2>
-            <p className="mt-4 text-xl text-gray-600">
-              The talented people behind our success
+            <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+              Guiding principles that shape our culture and drive our success.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {team.map((person) => (
-              <div key={person.name} className="pt-6">
-                <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                  <div className="-mt-6">
-                    <div className="flex items-center justify-center">
-                      <span className="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-200">
-                        <Image
-                          src={person.image}
-                          alt={person.name}
-                          width={96}
-                          height={96}
-                          className="h-full w-full object-cover"
-                        />
-                      </span>
-                    </div>
-                    <h3 className="mt-6 text-lg font-medium text-gray-900 text-center">
-                      {person.name}
-                    </h3>
-                    <p className="mt-1 text-base text-gray-600 text-center">
-                      {person.role}
-                    </p>
-                    <p className="mt-3 text-base text-gray-600 text-center">
-                      {person.bio}
-                    </p>
-                  </div>
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {team.map((member) => (
+              <div key={member.name} className="team-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div className="h-48 overflow-hidden">
+                  <Image
+                    className="w-full h-full object-cover parallax-image"
+                    src={member.image}
+                    alt={member.name}
+                    width={400}
+                    height={300}
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900">{member.name}</h3>
+                  <p className="mt-1 text-accent">{member.role}</p>
+                  <p className="mt-4 text-gray-500">{member.bio}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* Our Approach Section */}
       <div className="py-16 bg-white">

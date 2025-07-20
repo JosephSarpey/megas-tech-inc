@@ -166,19 +166,19 @@ export default function Home() {
             <div ref={ctaRef} className="flex flex-col sm:flex-row justify-center gap-4 relative z-20">
               <Button 
                 as="a"
-                href="/contact" 
+                href="/services" 
                 variant="accent" 
                 size="lg"
                 className="group relative z-10"
                 withArrow
               >
-                Get Started
+                Our Services
               </Button>
               <Link 
-                href="/services"
+                href="/about"
                 className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium rounded-lg border border-white/30 bg-transparent text-white hover:bg-accent/10 hover:border-accent hover:text-accent transition-all duration-300 group"
               >
-                Our Services
+                About Us
                 <FiArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>

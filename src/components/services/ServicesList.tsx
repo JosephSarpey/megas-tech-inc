@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiTool, FiCode, FiServer, FiDatabase, FiCloud, FiShoppingCart, FiArrowRight, FiMail, FiFileText, FiPieChart } from 'react-icons/fi';
+import { FiTool, FiCode, FiServer, FiDatabase, FiCloud, FiShoppingCart, FiArrowRight, FiMail, FiFileText, FiPieChart, FiLayout } from 'react-icons/fi';
 import Link from 'next/link';
 
 const services = [
@@ -14,7 +14,7 @@ const services = [
   {
     title: 'UI/UX Design',
     description: 'Beautiful, intuitive user interfaces and experiences that engage users and drive conversions.',
-    icon: <FiTool className="w-8 h-8 text-accent-default" />,
+    icon: <FiLayout className="w-8 h-8 text-accent-default" />,
     href: '/services/ui-ux-design',
   },
   {
