@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiMenu, FiX, FiCode, FiLayers, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo, FiHelpCircle, FiBriefcase, FiUser } from 'react-icons/fi';
+import { FiMenu, FiX, FiCode, FiLayers, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo, FiHelpCircle, FiBriefcase, FiUser, FiArrowRight } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
@@ -66,14 +66,20 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest('.dropdown-container')) {
+      const target = event.target as HTMLElement;
+      // Close dropdowns when clicking outside
+      if (!target.closest('.dropdown-container')) {
         setOpenDropdown(null);
+      }
+      // Close mobile menu when clicking outside
+      if (isOpen && !target.closest('.mobile-menu-container') && !target.closest('button[aria-expanded]')) {
+        setIsOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [isOpen]);
 
   const toggleDropdown = (name: string) => {
     setOpenDropdown(prev => prev === name ? null : name);
@@ -224,9 +230,9 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
-              aria-expanded="false"
+              aria-expanded={isOpen}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
-              <span className="sr-only">Open main menu</span>
               {isOpen ? (
                 <FiX className="block h-6 w-6" />
               ) : (
@@ -240,98 +246,186 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-16 left-0 right-0 bg-gray-900/95 backdrop-blur-md border-b border-gray-800"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navLinks.map((link) => (
-                link.isDropdown ? (
-                  <div key={link.name}>
-                    <button
-                      onClick={() => toggleDropdown(link.name)}
-                      className={`block px-3 py-1.5 rounded-md text-base font-medium ${
-                        link.items?.some(item => pathname === item.href)
-                          ? 'bg-accent/10 text-accent'
-                          : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      <span>{link.name}</span>
-                      <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${openDropdown === link.name ? 'transform rotate-180' : ''}`} />
-                    </button>
-                    
-                    <AnimatePresence>
-                      {openDropdown === link.name && link.items && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-700 z-50"
-                          onMouseLeave={() => setOpenDropdown(null)}
+          <div className="fixed inset-0 z-30 md:hidden" onClick={() => setIsOpen(false)}>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -10, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: 'auto' }}
+              exit={{ opacity: 0, y: -10, height: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="absolute left-0 right-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-hidden shadow-lg border-t border-gray-800 mobile-menu-container"
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              role="menu"
+              aria-label="Mobile menu"
+            >
+              <div className="px-4 py-2 space-y-1">
+                {navLinks.map((link) => (
+                  link.isDropdown ? (
+                    <div key={link.name} className="relative">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleDropdown(link.name);
+                        }}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        className="w-full flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                        aria-expanded={openDropdown === link.name}
+                        aria-haspopup="true"
+                        role="menuitem"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="text-accent">{link.icon}</span>
+                          <span>{link.name}</span>
+                        </div>
+                        <span 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleDropdown(link.name);
+                          }}
+                          onMouseDown={(e) => e.stopPropagation()}
+                          className="p-1 flex items-center justify-center"
                         >
-                          <div className="py-1">
+                          <FiChevronDown 
+                            className={`w-4 h-4 transition-transform duration-200 ${openDropdown === link.name ? 'transform rotate-180' : ''}`} 
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </button>
+                      
+                      <AnimatePresence>
+                        {openDropdown === link.name && link.items && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0, overflow: 'hidden' }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.15, ease: 'easeInOut' }}
+                            className="pl-8 space-y-1 mt-1"
+                          >
                             {link.items.map((item) => (
                               <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`px-4 py-1.5 text-sm flex items-center space-x-2 ${
-                                  pathname === item.href
-                                    ? 'bg-accent/10 text-accent'
-                                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                                }`}
-                                onClick={() => setOpenDropdown(null)}
+                                className="block px-3 py-2 text-sm rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsOpen(false);
+                                  setOpenDropdown(null);
+                                }}
+                                role="menuitem"
                               >
-                                <span>{item.name}</span>
+                                {item.name}
                               </Link>
                             ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    key={link.name}
-                    href={link.href || '#'}
-                    className={`block px-3 py-1.5 rounded-md text-base font-medium ${
-                      pathname === link.href
-                        ? 'bg-accent/10 text-accent'
-                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <span className="text-accent">{link.icon}</span>
-                      <span>{link.name}</span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
-                  </Link>
-                )
-              ))}
-              
-              {/* Mobile More Links */}
-              <div className="border-t border-gray-800 my-2 pt-2">
-                {moreLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href || '#'}
-                    className={`block px-3 py-1.5 rounded-md text-base font-medium ${
-                      pathname === link.href
-                        ? 'bg-accent/10 text-accent'
-                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                    }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <span className="text-accent">{link.icon}</span>
-                      <span>{link.name}</span>
-                    </div>
-                  </Link>
+                  ) : (
+                    <Link
+                      key={link.name}
+                      href={link.href || '#'}
+                      className="flex items-center px-3 py-2.5 text-base font-medium rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                      onClick={() => {
+                        setIsOpen(false);
+                        setOpenDropdown(null);
+                      }}
+                      role="menuitem"
+                    >
+                      <span className="text-accent mr-3">{link.icon}</span>
+                      {link.name}
+                    </Link>
+                  )
                 ))}
+                
+                {/* Mobile More Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleDropdown('more');
+                    }}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    className="w-full flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                    aria-expanded={openDropdown === 'more'}
+                    aria-haspopup="true"
+                    role="menuitem"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-accent">
+                        <FiMenu className="w-4 h-4" />
+                      </span>
+                      <span>More</span>
+                    </div>
+                    <span 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleDropdown('more');
+                      }}
+                      onMouseDown={(e) => e.stopPropagation()}
+                      className="p-1 flex items-center justify-center"
+                    >
+                      <FiChevronDown 
+                        className={`w-4 h-4 transition-transform duration-200 ${openDropdown === 'more' ? 'transform rotate-180' : ''}`} 
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {openDropdown === 'more' && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, overflow: 'hidden' }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.15, ease: 'easeInOut' }}
+                        className="pl-8 space-y-1 mt-1"
+                      >
+                        {moreLinks.map((link) => (
+                          <Link
+                            key={link.name}
+                            href={link.href || '#'}
+                            className="flex items-center px-3 py-2 text-sm rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsOpen(false);
+                              setOpenDropdown(null);
+                            }}
+                            role="menuitem"
+                          >
+                            <span className="text-accent mr-3">{link.icon}</span>
+                            {link.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+                
+                {/* CTA Button */}
+                <div className="mt-2 pt-2 border-t border-gray-800">
+                  <Link
+                    href="/pricing"
+                    className="w-full flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-md text-primary bg-accent hover:bg-accent/90 transition-colors duration-200"
+                    onClick={() => setIsOpen(false)}
+                    role="menuitem"
+                  >
+                    Get Started
+                    <FiArrowRight className="ml-2 w-4 h-4" />
+                  </Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </header>
