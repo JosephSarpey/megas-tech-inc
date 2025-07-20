@@ -80,19 +80,19 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`w-full bg-primary/90 backdrop-blur-md py-4 fixed top-0 left-0 z-50 transition-all duration-300 ${
+    <header className={`w-full bg-primary/90 backdrop-blur-md py-2 fixed top-0 left-0 z-50 transition-all duration-300 ${
       scrolled ? 'shadow-lg' : ''
     }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <Link href="/" className="flex items-center h-8">
             <Image 
               src="/megas_logo.png" 
               alt="MEGAS TECH INC" 
-              width={150} 
-              height={40} 
-              className="h-12 w-auto object-contain"
+              width={120} 
+              height={32} 
+              className="h-8 w-auto object-contain"
               priority
             />
           </Link>
@@ -104,7 +104,7 @@ const Navbar = () => {
                 <div key={link.name} className="relative dropdown-container">
                   <button 
                     onClick={() => toggleDropdown(link.name)}
-                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-2 ${
+                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 ${
                       link.items?.some(item => pathname === item.href)
                         ? 'text-accent bg-accent/10'
                         : 'text-gray-300 hover:text-white hover:bg-white/5'
@@ -129,7 +129,7 @@ const Navbar = () => {
                             <Link
                               key={item.name}
                               href={item.href}
-                              className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                              className="block px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-700"
                               onClick={() => setOpenDropdown(null)}
                             >
                               {item.name}
@@ -144,7 +144,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href || '#'}
-                  className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-2 ${
+                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 ${
                     pathname === link.href
                       ? 'text-accent bg-accent/10'
                       : 'text-gray-300 hover:text-white hover:bg-white/5'
@@ -160,7 +160,7 @@ const Navbar = () => {
             <div className="relative dropdown-container">
               <button
                 onClick={() => toggleDropdown('more')}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-2 ${
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 ${
                   moreLinks.some(link => pathname === link.href)
                     ? 'text-accent bg-accent/10'
                     : 'text-gray-300 hover:text-white hover:bg-white/5'
@@ -184,7 +184,7 @@ const Navbar = () => {
                         <Link
                           key={link.name}
                           href={link.href || '#'}
-                          className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700"
+                          className="block px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-700 flex items-center space-x-2"
                           onClick={() => setOpenDropdown(null)}
                         >
                           <span className="text-accent">{link.icon}</span>
@@ -252,7 +252,7 @@ const Navbar = () => {
                   <div key={link.name}>
                     <button
                       onClick={() => toggleDropdown(link.name)}
-                      className={`block px-3 py-2 rounded-md text-base font-medium ${
+                      className={`block px-3 py-1.5 rounded-md text-base font-medium ${
                         link.items?.some(item => pathname === item.href)
                           ? 'bg-accent/10 text-accent'
                           : 'text-gray-300 hover:bg-white/5 hover:text-white'
@@ -276,7 +276,7 @@ const Navbar = () => {
                               <Link
                                 key={item.name}
                                 href={item.href}
-                                className={`px-4 py-2 text-sm flex items-center space-x-2 ${
+                                className={`px-4 py-1.5 text-sm flex items-center space-x-2 ${
                                   pathname === item.href
                                     ? 'bg-accent/10 text-accent'
                                     : 'text-gray-300 hover:bg-white/5 hover:text-white'
@@ -295,7 +295,7 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     href={link.href || '#'}
-                    className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    className={`block px-3 py-1.5 rounded-md text-base font-medium ${
                       pathname === link.href
                         ? 'bg-accent/10 text-accent'
                         : 'text-gray-300 hover:bg-white/5 hover:text-white'
@@ -316,7 +316,7 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     href={link.href || '#'}
-                    className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    className={`block px-3 py-1.5 rounded-md text-base font-medium ${
                       pathname === link.href
                         ? 'bg-accent/10 text-accent'
                         : 'text-gray-300 hover:bg-white/5 hover:text-white'
