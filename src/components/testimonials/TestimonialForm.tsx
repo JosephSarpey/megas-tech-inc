@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import Button from '../ui/Button';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -300,10 +301,11 @@ export default function TestimonialForm() {
       </div>
 
       <div className="pt-2">
-        <button
+        <Button
           type="submit"
+          variant="primary"
           disabled={isSubmitting}
-          className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full"
         >
           {isSubmitting ? (
             <>
@@ -316,7 +318,7 @@ export default function TestimonialForm() {
           ) : (
             'Submit Testimonial'
           )}
-        </button>
+        </Button>
       </div>
     </motion.form>
   );

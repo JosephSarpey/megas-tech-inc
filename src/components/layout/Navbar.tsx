@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiMenu, FiX, FiCode, FiLayers, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo, FiHelpCircle, FiBriefcase, FiUser, FiArrowRight } from 'react-icons/fi';
+import { FiMenu, FiX, FiCode, FiTool, FiMessageSquare, FiMail, FiChevronDown, FiDollarSign, FiInfo, FiHelpCircle, FiBriefcase, FiUser, FiArrowRight, FiHome } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import Button from '../ui/Button';
 
 interface NavLinkItem {
   name: string;
@@ -27,7 +28,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navLinks: NavLink[] = [
-    { name: 'Home', href: '/', icon: <FiLayers className="w-5 h-5" /> },
+    { name: 'Home', href: '/', icon: <FiHome className="w-5 h-5" /> },
     { name: 'Services', href: '/services', icon: <FiTool className="w-5 h-5" /> },
     { name: 'Pricing', href: '/pricing', icon: <FiDollarSign className="w-5 h-5" /> },
     { 
@@ -203,9 +204,10 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
             
-            <Link
+            <Button
               href="/pricing"
-              className="ml-2 px-6 py-2 bg-accent text-primary font-medium rounded-md hover:bg-accent/90 transition-all duration-200 flex items-center space-x-2"
+              variant="primary"
+              size="sm"
             >
               <span>Get Started</span>
               <svg
@@ -222,7 +224,7 @@ const Navbar = () => {
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 />
               </svg>
-            </Link>
+            </Button>
           </nav>
 
           {/* Mobile menu button */}

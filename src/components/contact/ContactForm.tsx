@@ -4,6 +4,7 @@ import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckCircle, FiAlertCircle } from 
 import { useState, useRef, useCallback } from 'react';
 import { motion, Variants } from "framer-motion";
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import Button from '../ui/Button';
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -389,10 +390,11 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
           )}
           
           <div className="pt-2">
-            <button
+            <Button
               type="submit"
+              variant="primary"
               disabled={isSubmitting}
-              className={`w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-md transition-colors ${
+              className={`w-full ${
                 isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
@@ -410,7 +412,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
                   {isSalesInquiry ? 'Send Inquiry' : 'Send Message'}
                 </span>
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </motion.div>

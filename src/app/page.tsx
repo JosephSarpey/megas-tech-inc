@@ -167,7 +167,7 @@ export default function Home() {
               <Button 
                 as="a"
                 href="/services" 
-                variant="accent" 
+                variant="primary" 
                 size="lg"
                 className="group relative z-10"
                 withArrow
@@ -176,7 +176,7 @@ export default function Home() {
               </Button>
               <Link 
                 href="/about"
-                className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium rounded-lg border border-white/30 bg-transparent text-white hover:bg-accent/10 hover:border-accent hover:text-accent transition-all duration-300 group"
+                className="inline-flex items-center justify-center px-6 py-3 text-lg font-medium rounded-full border border-white/30 bg-transparent text-white hover:bg-accent/10 hover:border-accent hover:text-accent transition-all duration-300 group"
               >
                 About Us
                 <FiArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />

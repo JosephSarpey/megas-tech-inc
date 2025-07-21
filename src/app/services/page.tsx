@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import ServicesList from '@/components/services/ServicesList';
+import Button from '@/components/ui/Button';
 
 export const metadata: Metadata = {
   title: 'Our Services | MEGAS TECH INC',
@@ -25,12 +26,14 @@ export default function Services() {
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
             Let&apos;s discuss how we can help you achieve your business goals with our technology solutions.
           </p>
-          <a
+          <Button
             href="/contact"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent/90 transition-colors duration-300"
+            variant="primary"
+            size="md"
+            withArrow
           >
             Get in Touch
-          </a>
+          </Button>
         </div>
       </div>
     </div>
