@@ -46,7 +46,7 @@ export default function ServicePage({
   description,
   features,
   ctaText = 'Get Started',
-  ctaHref = '/contact',
+  ctaHref = '/contact/sales',
   children,
 }: ServicePageProps) {
   return (

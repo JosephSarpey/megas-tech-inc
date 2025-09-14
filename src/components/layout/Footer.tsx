@@ -53,6 +53,10 @@ const Footer = () => {
         { name: 'UI/UX Design', href: '/services/ui-ux-design' },
         { name: 'Tech Consulting', href: '/services/tech-consulting' },
         { name: 'Maintenance', href: '/services/maintenance' },
+        { name: 'Email Plans', href: '/services/email-plans' },
+        { name: 'E-Commerce Solutions', href: '/services/e-commerce' },
+        { name: 'Content Management', href: '/services/content-management' },
+        { name: 'Graphic Design', href: '/services/graphic-design' },
       ],
     },
     {

@@ -1,5 +1,5 @@
 import { FiCheck, FiTag } from 'react-icons/fi';
-import Link from 'next/link';
+import Button from '@/components/ui/Button';
 
 type PricingTier = {
   name: string;
@@ -613,12 +613,13 @@ const Pricing = () => {
                       ))}
                     </ul>
                     <div className="mt-8">
-                      <Link
+                      <Button
                         href={tier.href}
-                        className="block w-full bg-accent text-white text-center py-3 px-6 rounded-md hover:bg-accent/90 transition-colors"
+                        variant='primary'
+                        className='w-full'
                       >
                         {tier.cta}
-                      </Link>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -637,12 +638,12 @@ const Pricing = () => {
               </p>
             </div>
             <div className="mt-4 md:mt-0">
-              <Link
+              <Button
                 href="/contact/sales"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-accent/90"
+                variant='primary'
               >
                 Contact Sales
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
