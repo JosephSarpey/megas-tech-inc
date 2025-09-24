@@ -19,7 +19,7 @@ const firaCode = Fira_Code({
 });
 
 const siteName = "MEGAS TECH INC";
-const siteDescription = "Transforming ideas into digital reality with cutting-edge web development, UI/UX design, and tech consulting services.";
+const siteDescription = "Megas Tech Inc - Transforming ideas into digital reality with cutting-edge web development, UI/UX design, and tech consulting services.";
 const siteUrl = 'https://themegastechinc.com';
 const siteImage = '/og-image.jpg';
 
@@ -28,6 +28,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Corporation',
   name: siteName,
+  alternateName: ["Megas Tech", "MEGAS TECH", "megas tech"],
   description: siteDescription,
   url: siteUrl,
   logo: `${siteUrl}/megas_logo.png`,
@@ -47,12 +48,12 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Innovative Technology Solutions`,
-    template: `%s | ${siteName}`
+    default: `${siteName} (Megas Tech) | Innovative Technology Solutions`,
+    template: `%s | ${siteName} (Megas Tech)`
   },
   description: siteDescription,
   keywords: [
-    "web development", "UI/UX design", "tech consulting", "software development", 
+    "megas tech", "megas tech inc", "megas", "mega", "tech solutions", "web development", "UI/UX design", "tech consulting", "software development", 
     "technology solutions", "digital transformation", "custom software", "responsive design",
     "e-commerce solutions", "cloud services", "IT consulting", "mobile app development"
   ],
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: `${siteName} | Innovative Technology Solutions`,
+    title: `${siteName} (Megas Tech) | Innovative Technology Solutions`,
     description: siteDescription,
     url: siteUrl,
     siteName: siteName,
@@ -90,7 +91,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} | Innovative Technology Solutions`,
+    title: `${siteName} (Megas Tech) | Innovative Technology Solutions`,
     description: siteDescription,
     images: [siteImage],
     creator: "@megastechinc",
