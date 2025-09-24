@@ -141,8 +141,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-white font-medium">Email Us</h4>
-                  <a href="mailto:info@megastech.com" className="text-gray-400 hover:text-accent transition-colors">
-                    info@megastech.com
+                  <a href="mailto:themegastechinc@gmail.com" className="text-gray-400 hover:text-accent transition-colors">
+                    themegastechinc@gmail.com
                   </a>
                 </div>
               </div>
@@ -166,8 +166,8 @@ const Contact = () => {
                 <div>
                   <h4 className="text-white font-medium">Visit Us</h4>
                   <p className="text-gray-400">
-                    123 Tech Street<br />
-                    San Francisco, CA 94107
+                  Kasoa new market road, opposite soccer bet,<br />
+                  Central Region, Ghana
                   </p>
                 </div>
               </div>

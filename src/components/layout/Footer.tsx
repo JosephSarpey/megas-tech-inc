@@ -132,18 +132,18 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <FiMapPin className="text-accent mt-1 mr-3 flex-shrink-0" />
-                <span>123 Tech Street, Silicon Valley, CA 94025</span>
+                <span>Kasoa new market road, opposite soccer bet,Central Region, Ghana</span>
               </li>
               <li className="flex items-center">
                 <FiMail className="text-accent mr-3" />
                 <a href="mailto:contact@megastech.inc" className="hover:text-accent transition-colors duration-200">
-                  contact@megastech.inc
+                  themegastechinc@gmail.com
                 </a>
               </li>
               <li className="flex items-center">
                 <FiPhone className="text-accent mr-3" />
                 <a href="tel:+11234567890" className="hover:text-accent transition-colors duration-200">
-                  +1 (123) 456-7890
+                  +91 (987) 292-6176
                 </a>
               </li>
             </ul>
