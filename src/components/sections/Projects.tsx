@@ -1,32 +1,35 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Button from '@/components/ui/Button';
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Button from "@/components/ui/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    title: "Online Coffee Shop",
+    description:
+      "A modern coffee roasters website and online store with smooth animations and responsive design.",
+    image: "/safari-roast.jpg",
+    link: "/projects/safari-roast",
+  },
+  {
+    title: "Finance Management System",
+    description:
+      "A savings and loans management system with features for loan management, savings management, customer management, and financial reporting.",
+    image: "/unique-susu.jpg",
+    link: "/projects/finance-management-system",
+  },
+  {
     title: "E-Commerce Platform",
-    description: "A scalable online store with seamless checkout and modern UI.",
+    description:
+      "A scalable online store with seamless checkout and modern UI.",
     image: "/vestraversa.jpg",
-    link: "/projects/ecommerce-platform"
+    link: "/projects/ecommerce-platform",
   },
-  {
-    title: "Travel Agency Website",
-    description: "A travel agency website with interactive animations and responsive design.",
-    image: "/teebel.jpg",
-    link: "/projects/travel-agency"
-  },
-  {
-    title: "Construction Website",
-    description: "A construction website with interactive animations and responsive design.",
-    image: "/dermolahu.jpg",
-    link: "/projects/construction"
-  }
 ];
 
 const Projects = () => {
@@ -51,10 +54,10 @@ const Projects = () => {
           duration: 0.8,
           scrollTrigger: {
             trigger: headingRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
+            start: "top 80%",
+            toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       cardsRef.current.forEach((card, index) => {
@@ -69,10 +72,10 @@ const Projects = () => {
             delay: index * 0.15,
             scrollTrigger: {
               trigger: card,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
+              start: "top 85%",
+              toggleActions: "play none none none",
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -92,11 +95,15 @@ const Projects = () => {
           <span className="inline-block px-3 py-1 text-sm font-semibold text-accent bg-accent/10 rounded-full mb-4">
             Our Projects
           </span>
-          <h2 ref={headingRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2
+            ref={headingRef}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+          >
             Recent <span className="text-accent">Work</span>
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-300">
-            Explore some of our latest projects showcasing our expertise in web development, design, and technology solutions.
+            Explore some of our latest projects showcasing our expertise in web
+            development, design, and technology solutions.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -104,7 +111,7 @@ const Projects = () => {
             <a
               key={project.title}
               href={project.link}
-              ref={el => {
+              ref={(el) => {
                 if (el) cardsRef.current[index] = el;
               }}
               className="group block bg-white/10 border border-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-accent/20 transition-all duration-300 hover:scale-105"
@@ -118,12 +125,24 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-2">
+                  {project.title}
+                </h3>
                 <p className="text-gray-300 mb-4">{project.description}</p>
                 <span className="inline-flex items-center text-accent font-semibold group-hover:underline">
                   View Project
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="ml-2 w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </span>
               </div>
@@ -133,8 +152,8 @@ const Projects = () => {
         <div className="mt-16 text-center">
           <Button
             as="a"
-            href="/projects" 
-            variant="accent" 
+            href="/projects"
+            variant="accent"
             size="lg"
             className="group"
             withArrow

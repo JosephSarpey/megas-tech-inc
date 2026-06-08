@@ -1,70 +1,77 @@
 "use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { FiGithub, FiTwitter, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import Link from "next/link";
+import Image from "next/image";
+import {
+  FiGithub,
+  FiTwitter,
+  FiLinkedin,
+  FiMail,
+  FiPhone,
+  FiMapPin,
+} from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   const socialLinks = [
     {
-      name: 'GitHub',
-      target: '_blank',
+      name: "GitHub",
+      target: "_blank",
       icon: <FiGithub className="w-5 h-5" />,
-      href: 'https://github.com/JosephSarpey',
+      href: "https://github.com/JosephSarpey",
     },
     {
-      name: 'Twitter',
-      target: '_blank', 
+      name: "Twitter",
+      target: "_blank",
       icon: <FiTwitter className="w-5 h-5" />,
-      href: 'https://twitter.com/megastech',
+      href: "https://twitter.com/megastech",
     },
     {
-      name: 'LinkedIn',
-      target: '_blank',
+      name: "LinkedIn",
+      target: "_blank",
       icon: <FiLinkedin className="w-5 h-5" />,
-      href: 'https://linkedin.com/company/megastech',
+      href: "https://linkedin.com/company/megastech",
     },
     {
-      name: 'Email',
-      target: '_blank',
+      name: "Email",
+      target: "_blank",
       icon: <FiMail className="w-5 h-5" />,
-      href: 'mailto:contact@megastech.inc',
+      href: "mailto:contact@megastech.inc",
     },
   ];
 
   const footerLinks = [
     {
-      title: 'Company',
+      title: "Company",
       links: [
-        { name: 'About Us', href: '/about' },
-        { name: 'Careers', href: '/careers' },
-        { name: 'Blog', href: '/blog' },
-        { name: 'Contact', href: '/contact' },
-        { name: 'FAQs', href: '/faq' },
+        { name: "About Us", href: "/about" },
+        { name: "Careers", href: "/careers" },
+        { name: "Blog", href: "/blog" },
+        { name: "Contact", href: "/contact" },
+        { name: "FAQs", href: "/faq" },
       ],
     },
     {
-      title: 'Services',
+      title: "Services",
       links: [
-        { name: 'Web Development', href: '/services/web-development' },
-        { name: 'UI/UX Design', href: '/services/ui-ux-design' },
-        { name: 'Tech Consulting', href: '/services/tech-consulting' },
-        { name: 'Maintenance', href: '/services/maintenance' },
-        { name: 'Email Plans', href: '/services/email-plans' },
-        { name: 'E-Commerce Solutions', href: '/services/e-commerce' },
-        { name: 'Content Management', href: '/services/content-management' },
-        { name: 'Graphic Design', href: '/services/graphic-design' },
+        { name: "Web Development", href: "/services/web-development" },
+        { name: "UI/UX Design", href: "/services/ui-ux-design" },
+        { name: "Tech Consulting", href: "/services/tech-consulting" },
+        { name: "Maintenance", href: "/services/maintenance" },
+        { name: "Email Plans", href: "/services/email-plans" },
+        { name: "E-Commerce Solutions", href: "/services/e-commerce" },
+        { name: "Content Management", href: "/services/content-management" },
+        { name: "Graphic Design", href: "/services/graphic-design" },
       ],
     },
     {
-      title: 'Legal',
+      title: "Legal",
       links: [
-        { name: 'Privacy Policy', href: '/privacy' },
-        { name: 'Terms of Service', href: '/terms' },
-        { name: 'Cookie Policy', href: '/cookies' },
+        { name: "Privacy Policy", href: "/privacy" },
+        { name: "Terms of Service", href: "/terms" },
+        { name: "Cookie Policy", href: "/cookies" },
       ],
     },
   ];
@@ -77,17 +84,18 @@ const Footer = () => {
           <div className="space-y-6">
             <div className="flex items-center">
               <Link href="/" className="block">
-                <Image 
-                  src="/megas_logo.png" 
-                  alt="MEGAS TECH INC" 
-                  width={180} 
-                  height={50} 
+                <Image
+                  src="/megas_logo.png"
+                  alt="MEGAS TECH INC"
+                  width={180}
+                  height={50}
                   className="h-12 w-auto"
                 />
               </Link>
             </div>
             <p className="text-gray-400">
-              Transforming ideas into digital reality with cutting-edge technology solutions.
+              Transforming ideas into digital reality with cutting-edge
+              technology solutions.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -110,7 +118,9 @@ const Footer = () => {
           {/* Footer Links */}
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="text-white font-semibold mb-4 text-lg">{section.title}</h3>
+              <h3 className="text-white font-semibold mb-4 text-lg">
+                {section.title}
+              </h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
@@ -128,22 +138,34 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-white font-semibold mb-4 text-lg">Contact Us</h3>
+            <h3 className="text-white font-semibold mb-4 text-lg">
+              Contact Us
+            </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <FiMapPin className="text-accent mt-1 mr-3 flex-shrink-0" />
-                <span>Kasoa new market road, opposite soccer bet,Central Region, Ghana</span>
+                <span>
+                  Kasoa new market road, opposite soccer bet,Central Region,
+                  Ghana
+                </span>
               </li>
               <li className="flex items-center">
-                <FiMail className="text-accent mr-3" />
-                <a href="mailto:contact@megastech.inc" className="hover:text-accent transition-colors duration-200">
-                  themegastechinc@gmail.com
+                <FiPhone className="text-accent mr-3 flex-shrink-0" />
+                <a
+                  href="tel:+233553288566"
+                  className="hover:text-accent transition-colors duration-200"
+                >
+                  0553288566
                 </a>
               </li>
+
               <li className="flex items-center">
-                <FiPhone className="text-accent mr-3" />
-                <a href="tel:+11234567890" className="hover:text-accent transition-colors duration-200">
-                  +91 (987) 292-6176
+                <FiMail className="text-accent mr-3 flex-shrink-0" />
+                <a
+                  href="mailto:contact@megastech.inc"
+                  className="hover:text-accent transition-colors duration-200"
+                >
+                  themegastechinc@gmail.com
                 </a>
               </li>
             </ul>
@@ -156,16 +178,28 @@ const Footer = () => {
             &copy; {currentYear} MEGAS TECH INC. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-gray-500 hover:text-accent text-sm transition-colors duration-200">
+            <Link
+              href="/privacy"
+              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-500 hover:text-accent text-sm transition-colors duration-200">
+            <Link
+              href="/terms"
+              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
+            >
               Terms of Service
             </Link>
-            <Link href="/cookies" className="text-gray-500 hover:text-accent text-sm transition-colors duration-200">
+            <Link
+              href="/cookies"
+              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
+            >
               Cookie Policy
             </Link>
-            <Link href="/faq" className="text-gray-500 hover:text-accent text-sm transition-colors duration-200">
+            <Link
+              href="/faq"
+              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
+            >
               FAQs
             </Link>
           </div>

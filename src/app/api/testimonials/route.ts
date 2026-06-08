@@ -1,14 +1,4 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-
-// Reuse the existing transporter from contact form or create a new one
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
 
 // Email validation helper
 function isValidEmail(email: string): boolean {
@@ -91,71 +81,33 @@ export async function POST(request: Request) {
       );
     }
 
-    // Prepare email content
-    const emailHtml = `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Testimonial Submission</title>
-        <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #212121; }
-          .container { max-width: 600px; margin: 0 auto; padding: 2rem; }
-          .header { text-align: center; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb; margin-bottom: 1.5rem; }
-          .content { background-color: #f8fafc; padding: 1.5rem; border-radius: 6px; margin-bottom: 1.5rem; }
-          .field { margin-bottom: 1rem; }
-          .label { font-weight: 500; color: #4b5563; display: block; margin-bottom: 0.25rem; }
-          .value { color: #111827; background: white; padding: 0.5rem 0.75rem; border-radius: 4px; border: 1px solid #e5e7eb; }
-          .rating { color: #f59e0b; font-size: 1.25rem; letter-spacing: 0.25rem; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>New Testimonial Submission</h1>
-          </div>
-          <div class="content">
-            <div class="field">
-              <span class="label">From:</span>
-              <div class="value">${formData.name} &lt;${formData.email}&gt;</div>
-            </div>
-            ${formData.position ? `
-            <div class="field">
-              <span class="label">Position:</span>
-              <div class="value">${formData.position}</div>
-            </div>` : ''}
-            ${formData.company ? `
-            <div class="field">
-              <span class="label">Company:</span>
-              <div class="value">${formData.company}</div>
-            </div>` : ''}
-            <div class="field">
-              <span class="label">Rating:</span>
-              <div class="rating">${'★'.repeat(Number(formData.rating))}${'☆'.repeat(5 - Number(formData.rating))}</div>
-            </div>
-            <div class="field">
-              <span class="label">Testimonial:</span>
-              <div class="value" style="white-space: pre-line;">${formData.testimonial}</div>
-            </div>
-          </div>
-        </div>
-      </body>
-      </html>
-    `;
+    // Send to Formspree
+    const formspreeUrl = process.env.FORMSPREE_TESTIMONIALS_URL;
+    
+    if (!formspreeUrl) {
+      console.warn('FORMSPREE_TESTIMONIALS_URL is not set. Simulating success.');
+    } else {
+      const response = await fetch(formspreeUrl, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          position: formData.position,
+          company: formData.company,
+          rating: formData.rating,
+          testimonial: formData.testimonial,
+          subject: `New Testimonial from ${formData.name}`,
+        }),
+      });
 
-    // Send email
-    const mailOptions = {
-      from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_RECIPIENT,
-      subject: `New Testimonial from ${formData.name}`,
-      html: emailHtml,
-      replyTo: formData.email,
-    };
-
-    console.log('Sending testimonial email to:', process.env.EMAIL_RECIPIENT);
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Testimonial email sent:', info.messageId);
+      if (!response.ok) {
+        throw new Error('Failed to send testimonial via Formspree');
+      }
+    }
 
     return new NextResponse(
       JSON.stringify({ 

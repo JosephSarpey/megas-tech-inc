@@ -116,9 +116,37 @@ export default function TestimonialForm() {
     setIsSubmitting(true);
     
     try {
-      // Here you would typically send the form data to your backend
-      // For now, we'll just simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const response = await fetch('/api/testimonials', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          position: formData.position,
+          company: formData.company,
+          rating: formData.rating,
+          testimonial: formData.testimonial,
+          captchaToken: formData.token,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.errors) {
+          setErrors(prev => ({ ...prev, ...data.errors }));
+          // Reset captcha if there was a captcha error
+          if (data.errors.captcha) {
+            captchaRef.current?.resetCaptcha();
+            setFormData(prev => ({ ...prev, token: '' }));
+          }
+          setIsSubmitting(false);
+          return;
+        }
+        throw new Error(data.message || 'Failed to submit testimonial');
+      }
       
       setIsSuccess(true);
       // Reset form

@@ -1,37 +1,9 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiExternalLink, FiGithub, FiCode, FiArrowRight } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiCode, FiArrowRight } from "react-icons/fi";
 
-const projects = [
-  {
-    id: 1,
-    title: 'E-commerce Platform',
-    description: 'A full-featured e-commerce platform with product catalog, cart, and payment integration.',
-    tags: ['React', 'Express.js', 'Node.js', 'MongoDB', 'Paypal', 'Tailwind CSS'],
-    github: '#',
-    demo: 'https://www.vestraversa.com',
-    link: '/projects/ecommerce-platform'
-  },
-  {
-    id: 2,
-    title: 'Travel Agency Website',
-    description: 'A travel agency website with interactive animations and responsive design.',
-    tags: ['Next.js', 'TypeScript', 'Paystack', 'Tailwind CSS'],
-    github: '#',
-    demo: 'https://teebel-global-travel-consultancy.vercel.app/',
-    link: '/projects/travel-agency'
-  },
-  {
-    id: 3,
-    title: 'Construction Website',
-    description: 'A modern construction website with smooth animations and responsive design.',
-    tags: ['React', 'Framer Motion', 'Tailwind CSS'], 
-    github: '#',
-    demo: 'https://dermolahu-draughtmanship-construction-works.vercel.app/',
-    link: '/projects/construction'
-  },
-];
+import { projects } from "@/data/projects";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -40,7 +12,7 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: "easeOut",
     },
   },
 };
@@ -96,11 +68,13 @@ export default function ProjectsList() {
                 )}
               </div>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+            <h3 className="text-xl font-semibold text-white mb-2">
+              {project.title}
+            </h3>
             <p className="text-gray-300 mb-4">{project.description}</p>
           </div>
           <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-700/50">
-            {project.tags.map((tag) => (
+            {project.technologies.map((tag) => (
               <span
                 key={tag}
                 className="px-2 py-1 text-xs font-medium bg-gray-700/50 text-gray-200 rounded-full"

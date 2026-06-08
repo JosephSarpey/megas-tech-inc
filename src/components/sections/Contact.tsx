@@ -1,11 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiTwitter, FiGithub, FiLinkedin, FiDribbble } from 'react-icons/fi';
-import Button from '@/components/ui/Button';
+import { useRef, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiSend,
+  FiTwitter,
+  FiGithub,
+  FiLinkedin,
+} from "react-icons/fi";
+import Button from "@/components/ui/Button";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +35,8 @@ const Contact = () => {
     success: boolean;
     message: string;
   } | null>(null);
+  const [token, setToken] = useState("");
+  const captchaRef = useRef<HCaptcha>(null);
 
   const {
     register,
@@ -46,14 +58,14 @@ const Contact = () => {
           duration: 0.8,
           scrollTrigger: {
             trigger: headingRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
+            start: "top 80%",
+            toggleActions: "play none none none",
           },
-        }
+        },
       );
 
       // Animate form elements
-      gsap.utils.toArray<HTMLElement>('.form-element').forEach((el, i) => {
+      gsap.utils.toArray<HTMLElement>(".form-element").forEach((el, i) => {
         gsap.fromTo(
           el,
           { y: 30, opacity: 0 },
@@ -64,10 +76,10 @@ const Contact = () => {
             delay: i * 0.1,
             scrollTrigger: {
               trigger: el,
-              start: 'top 90%',
-              toggleActions: 'play none none none',
+              start: "top 90%",
+              toggleActions: "play none none none",
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -76,27 +88,53 @@ const Contact = () => {
   }, []);
 
   const onSubmit = async (data: FormData) => {
+    if (!token) {
+      setSubmitStatus({
+        success: false,
+        message: "Please complete the captcha.",
+      });
+      return;
+    }
+
     try {
       setIsSubmitting(true);
       setSubmitStatus(null);
-      
-      // Here you would typically send the form data to your backend or email service
-      // For example, using EmailJS, Formspree, or your own API endpoint
-      console.log('Form submitted:', data);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...data, token }),
+      });
+
+      const contentType = response.headers.get("content-type");
+      let responseData;
+
+      if (contentType && contentType.includes("application/json")) {
+        responseData = await response.json();
+      } else {
+        throw new Error("Server returned an invalid response");
+      }
+
+      if (!response.ok) {
+        throw new Error(responseData.message || "Something went wrong");
+      }
+
       setSubmitStatus({
         success: true,
-        message: 'Your message has been sent successfully! We\'ll get back to you soon.',
+        message:
+          "Your message has been sent successfully! We'll get back to you soon.",
       });
       reset();
-    } catch (error) {
-      console.error('Error submitting form:', error);
+      setToken("");
+      captchaRef.current?.resetCaptcha();
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
       setSubmitStatus({
         success: false,
-        message: 'Something went wrong. Please try again later.',
+        message:
+          error.message || "Something went wrong. Please try again later.",
       });
     } finally {
       setIsSubmitting(false);
@@ -104,7 +142,11 @@ const Contact = () => {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative py-20 md:py-28 lg:py-36 bg-secondary">
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="relative py-20 md:py-28 lg:py-36 bg-secondary"
+    >
       {/* Background elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-accent/5 rounded-full filter blur-3xl"></div>
@@ -116,11 +158,15 @@ const Contact = () => {
           <span className="inline-block px-3 py-1 text-sm font-semibold text-accent bg-accent/10 rounded-full mb-4">
             Get In Touch
           </span>
-          <h2 ref={headingRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2
+            ref={headingRef}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+          >
             Contact <span className="text-accent">Us</span>
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-gray-300">
-            Have a project in mind or want to discuss how we can help your business? Drop us a message!
+            Have a project in mind or want to discuss how we can help your
+            business? Drop us a message!
           </p>
         </div>
 
@@ -128,9 +174,12 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div className="form-element">
-              <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Contact Information
+              </h3>
               <p className="text-gray-300 mb-8">
-                Fill out the form or reach out to us directly. We&apos;re here to help and answer any questions you might have.
+                Fill out the form or reach out to us directly. We&apos;re here
+                to help and answer any questions you might have.
               </p>
             </div>
 
@@ -141,7 +190,10 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-white font-medium">Email Us</h4>
-                  <a href="mailto:themegastechinc@gmail.com" className="text-gray-400 hover:text-accent transition-colors">
+                  <a
+                    href="mailto:themegastechinc@gmail.com"
+                    className="text-gray-400 hover:text-accent transition-colors"
+                  >
                     themegastechinc@gmail.com
                   </a>
                 </div>
@@ -153,7 +205,10 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-white font-medium">Call Us</h4>
-                  <a href="tel:+1234567890" className="text-gray-400 hover:text-accent transition-colors">
+                  <a
+                    href="tel:+1234567890"
+                    className="text-gray-400 hover:text-accent transition-colors"
+                  >
                     +1 (234) 567-890
                   </a>
                 </div>
@@ -166,8 +221,9 @@ const Contact = () => {
                 <div>
                   <h4 className="text-white font-medium">Visit Us</h4>
                   <p className="text-gray-400">
-                  Kasoa new market road, opposite soccer bet,<br />
-                  Central Region, Ghana
+                    Kasoa new market road, opposite soccer bet,
+                    <br />
+                    Central Region, Ghana
                   </p>
                 </div>
               </div>
@@ -177,10 +233,21 @@ const Contact = () => {
               <h4 className="text-white font-medium mb-4">Follow Us</h4>
               <div className="flex space-x-4">
                 {[
-                  { name: 'Twitter', icon: <FiTwitter className="text-lg" />, url: '#' },
-                  { name: 'GitHub', icon: <FiGithub className="text-lg" />, url: '#' },
-                  { name: 'LinkedIn', icon: <FiLinkedin className="text-lg" />, url: '#' },
-                  { name: 'Dribbble', icon: <FiDribbble className="text-lg" />, url: '#' },
+                  {
+                    name: "Twitter",
+                    icon: <FiTwitter className="text-lg" />,
+                    url: "#",
+                  },
+                  {
+                    name: "GitHub",
+                    icon: <FiGithub className="text-lg" />,
+                    url: "https://github.com/JosephSarpey",
+                  },
+                  {
+                    name: "LinkedIn",
+                    icon: <FiLinkedin className="text-lg" />,
+                    url: "#",
+                  },
                 ].map((social) => (
                   <a
                     key={social.name}
@@ -201,26 +268,29 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-10 form-element">
             {submitStatus && (
-              <div 
+              <div
                 className={`p-4 mb-6 rounded-lg ${
-                  submitStatus.success 
-                    ? 'bg-green-900/30 border border-green-500/30 text-green-200' 
-                    : 'bg-red-900/30 border border-red-500/30 text-red-200'
+                  submitStatus.success
+                    ? "bg-green-900/30 border border-green-500/30 text-green-200"
+                    : "bg-red-900/30 border border-red-500/30 text-red-200"
                 }`}
               >
                 {submitStatus.message}
               </div>
             )}
-            
-            <form 
-              ref={formRef} 
-              onSubmit={handleSubmit(onSubmit)} 
+
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit(onSubmit)}
               className="space-y-6"
               suppressHydrationWarning
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Your Name
                   </label>
                   <div className="relative">
@@ -228,20 +298,25 @@ const Contact = () => {
                       type="text"
                       id="name"
                       required
-                      {...register('name', { required: 'Name is required' })}
+                      {...register("name", { required: "Name is required" })}
                       className={`w-full px-4 py-3 bg-white/5 border ${
-                        errors.name ? 'border-red-500' : 'border-white/10'
+                        errors.name ? "border-red-500" : "border-white/10"
                       } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
                       placeholder="John Doe"
                     />
                     {errors.name && (
-                      <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>
+                      <p className="mt-1 text-sm text-red-400">
+                        {errors.name.message}
+                      </p>
                     )}
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Email Address
                   </label>
                   <div className="relative">
@@ -249,27 +324,32 @@ const Contact = () => {
                       type="email"
                       id="email"
                       required
-                      {...register('email', {
-                        required: 'Email is required',
+                      {...register("email", {
+                        required: "Email is required",
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: 'Invalid email address',
+                          message: "Invalid email address",
                         },
                       })}
                       className={`w-full px-4 py-3 bg-white/5 border ${
-                        errors.email ? 'border-red-500' : 'border-white/10'
+                        errors.email ? "border-red-500" : "border-white/10"
                       } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
                       placeholder="john@example.com"
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
+                      <p className="mt-1 text-sm text-red-400">
+                        {errors.email.message}
+                      </p>
                     )}
                   </div>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Subject
                 </label>
                 <div className="relative">
@@ -277,20 +357,27 @@ const Contact = () => {
                     type="text"
                     id="subject"
                     required
-                    {...register('subject', { required: 'Subject is required' })}
+                    {...register("subject", {
+                      required: "Subject is required",
+                    })}
                     className={`w-full px-4 py-3 bg-white/5 border ${
-                      errors.subject ? 'border-red-500' : 'border-white/10'
+                      errors.subject ? "border-red-500" : "border-white/10"
                     } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
                     placeholder="How can we help?"
                   />
                   {errors.subject && (
-                    <p className="mt-1 text-sm text-red-400">{errors.subject.message}</p>
+                    <p className="mt-1 text-sm text-red-400">
+                      {errors.subject.message}
+                    </p>
                   )}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Your Message
                 </label>
                 <div className="relative">
@@ -298,15 +385,39 @@ const Contact = () => {
                     id="message"
                     rows={5}
                     required
-                    {...register('message', { required: 'Message is required' })}
+                    {...register("message", {
+                      required: "Message is required",
+                    })}
                     className={`w-full px-4 py-3 bg-white/5 border ${
-                      errors.message ? 'border-red-500' : 'border-white/10'
+                      errors.message ? "border-red-500" : "border-white/10"
                     } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-transparent transition-colors`}
                     placeholder="Tell us about your project..."
                   ></textarea>
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-400">{errors.message.message}</p>
+                    <p className="mt-1 text-sm text-red-400">
+                      {errors.message.message}
+                    </p>
                   )}
+                </div>
+              </div>
+
+              <div
+                className="mt-6 relative"
+                style={{ transform: "translateZ(0)" }}
+              >
+                <div
+                  className="w-full overflow-visible"
+                  style={{
+                    minHeight: "78px",
+                    transform: "scale(0.9)",
+                    transformOrigin: "0 0",
+                  }}
+                >
+                  <HCaptcha
+                    sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
+                    onVerify={(t) => setToken(t)}
+                    ref={captchaRef}
+                  />
                 </div>
               </div>
 
@@ -319,7 +430,7 @@ const Contact = () => {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    'Sending...'
+                    "Sending..."
                   ) : (
                     <>
                       Send Message

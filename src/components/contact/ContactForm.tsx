@@ -234,7 +234,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             </div>
             <div className="ml-4">
               <h3 className="text-lg font-medium text-white">Email Us</h3>
-              <p className="text-gray-300">contact@megastech.com</p>
+              <p className="text-gray-300">themegastechinc@gmail.com</p>
               <p className="text-gray-400 text-sm mt-1">We will respond within 24 hours</p>
             </div>
           </div>
@@ -245,7 +245,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             </div>
             <div className="ml-4">
               <h3 className="text-lg font-medium text-white">Call Us</h3>
-              <p className="text-gray-300">+1 (555) 123-4567</p>
+              <p className="text-gray-300">0553288566</p>
               <p className="text-gray-400 text-sm mt-1">Mon-Fri, 9am-6pm EST</p>
             </div>
           </div>
@@ -256,8 +256,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             </div>
             <div className="ml-4">
               <h3 className="text-lg font-medium text-white">Visit Us</h3>
-              <p className="text-gray-300">123 Tech Street</p>
-              <p className="text-gray-300">San Francisco, CA 94107</p>
+              <p className="text-gray-300">Kasoa new market road, opposite soccer bet</p>
+              <p className="text-gray-300">Central Region, Ghana</p>
             </div>
           </div>
         </div>
