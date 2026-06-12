@@ -38,8 +38,8 @@ export default function MaintenancePage() {
       ctaHref="/contact?service=maintenance"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Comprehensive Maintenance Plans</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Comprehensive Maintenance Plans</h3>
+        <p className="text-[#A1A1AA]">
           Our maintenance services are designed to provide peace of mind, ensuring your digital presence remains secure, up-to-date, and performing at its best.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -52,8 +52,8 @@ export default function MaintenancePage() {
         </div>
 
         <div className="mt-6 space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-            <h4 className="font-semibold text-lg text-gray-900 mb-4">Our Maintenance Services Include:</h4>
+          <div className="bg-[#121214] p-6 rounded-lg shadow-md border border-white/10">
+            <h4 className="font-semibold text-lg text-white mb-4">Our Maintenance Services Include:</h4>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-3">
                 <div className="flex items-start">
@@ -95,7 +95,7 @@ export default function MaintenancePage() {
           </div>
 
           <div className="bg-primary/5 p-6 rounded-lg">
-            <h4 className="font-semibold text-lg text-gray-900 mb-3">Why Regular Maintenance Matters</h4>
+            <h4 className="font-semibold text-lg text-white mb-3">Why Regular Maintenance Matters</h4>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary font-bold mr-2">•</span>

@@ -3,14 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-  FiGithub,
-  FiTwitter,
-  FiLinkedin,
-  FiMail,
-  FiPhone,
-  FiMapPin,
-} from "react-icons/fi";
-import { motion } from "framer-motion";
+  LuGithub,
+  LuTwitter,
+  LuLinkedin,
+  LuMail,
+  LuPhone,
+  LuMapPin,
+} from "react-icons/lu";
 
 const currentYear = new Date().getFullYear();
 
@@ -18,26 +17,22 @@ const Footer = () => {
   const socialLinks = [
     {
       name: "GitHub",
-      target: "_blank",
-      icon: <FiGithub className="w-5 h-5" />,
+      icon: <LuGithub className="w-4 h-4" />,
       href: "https://github.com/JosephSarpey",
     },
     {
       name: "Twitter",
-      target: "_blank",
-      icon: <FiTwitter className="w-5 h-5" />,
+      icon: <LuTwitter className="w-4 h-4" />,
       href: "https://twitter.com/megastech",
     },
     {
       name: "LinkedIn",
-      target: "_blank",
-      icon: <FiLinkedin className="w-5 h-5" />,
+      icon: <LuLinkedin className="w-4 h-4" />,
       href: "https://linkedin.com/company/megastech",
     },
     {
       name: "Email",
-      target: "_blank",
-      icon: <FiMail className="w-5 h-5" />,
+      icon: <LuMail className="w-4 h-4" />,
       href: "mailto:contact@megastech.inc",
     },
   ];
@@ -77,48 +72,68 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-gray-300 pt-16 pb-8">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Company Info */}
-          <div className="space-y-6">
-            <div className="flex items-center">
-              <Link href="/" className="block">
-                <Image
-                  src="/megas_logo.png"
-                  alt="MEGAS TECH INC"
-                  width={180}
-                  height={50}
-                  className="h-12 w-auto"
-                />
-              </Link>
-            </div>
-            <p className="text-gray-400">
-              Transforming ideas into digital reality with cutting-edge
-              technology solutions.
+    <footer className="bg-[#050505] text-[#A1A1AA]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-2 space-y-5">
+            <Link href="/" className="block" aria-label="MEGAS TECH INC home">
+              <Image
+                src="/megas_logo.png"
+                alt="MEGAS TECH INC"
+                width={160}
+                height={44}
+                className="h-10 w-auto brightness-0 invert"
+              />
+            </Link>
+            <p className="text-[#A1A1AA] text-sm leading-relaxed max-w-xs">
+              Transforming ideas into digital reality with cutting-edge technology solutions.
             </p>
-            <div className="flex space-x-4">
+
+            {/* Contact info */}
+            <div className="space-y-2">
+              <a
+                href="tel:+233553288566"
+                className="flex items-center gap-2 text-sm text-[#A1A1AA] hover:text-white transition-colors duration-200"
+              >
+                <LuPhone className="w-3.5 h-3.5 flex-shrink-0 text-accent" />
+                0553288566
+              </a>
+              <a
+                href="mailto:themegastechinc@gmail.com"
+                className="flex items-center gap-2 text-sm text-[#A1A1AA] hover:text-white transition-colors duration-200"
+              >
+                <LuMail className="w-3.5 h-3.5 flex-shrink-0 text-accent" />
+                themegastechinc@gmail.com
+              </a>
+              <div className="flex items-start gap-2 text-sm text-[#A1A1AA]">
+                <LuMapPin className="w-3.5 h-3.5 flex-shrink-0 text-accent mt-0.5" />
+                <span>Kasoa, Central Region, Ghana</span>
+              </div>
+            </div>
+
+            {/* Socials */}
+            <div className="flex items-center gap-2 pt-1">
               {socialLinks.map((social) => (
-                <motion.a
+                <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-accent transition-colors duration-200"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 text-[#A1A1AA] hover:bg-white/10 hover:text-white transition-all duration-200"
                   aria-label={social.name}
                 >
                   {social.icon}
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
 
-          {/* Footer Links */}
+          {/* Link Columns */}
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="text-white font-semibold mb-4 text-lg">
+              <h3 className="text-white text-sm font-semibold mb-4 tracking-[-0.01em]">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -126,7 +141,7 @@ const Footer = () => {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-accent transition-colors duration-200"
+                      className="text-sm text-[#A1A1AA] hover:text-white transition-colors duration-200"
                     >
                       {link.name}
                     </Link>
@@ -135,71 +150,24 @@ const Footer = () => {
               </ul>
             </div>
           ))}
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-white font-semibold mb-4 text-lg">
-              Contact Us
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <FiMapPin className="text-accent mt-1 mr-3 flex-shrink-0" />
-                <span>
-                  Kasoa new market road, opposite soccer bet,Central Region,
-                  Ghana
-                </span>
-              </li>
-              <li className="flex items-center">
-                <FiPhone className="text-accent mr-3 flex-shrink-0" />
-                <a
-                  href="tel:+233553288566"
-                  className="hover:text-accent transition-colors duration-200"
-                >
-                  0553288566
-                </a>
-              </li>
-
-              <li className="flex items-center">
-                <FiMail className="text-accent mr-3 flex-shrink-0" />
-                <a
-                  href="mailto:contact@megastech.inc"
-                  className="hover:text-accent transition-colors duration-200"
-                >
-                  themegastechinc@gmail.com
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-500 text-sm">
+        {/* Bottom bar */}
+        <div className="mt-14 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[#71717A]">
             &copy; {currentYear} MEGAS TECH INC. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link
-              href="/privacy"
-              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
-            >
+          <div className="flex items-center gap-5">
+            <Link href="/privacy" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
               Privacy Policy
             </Link>
-            <Link
-              href="/terms"
-              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
-            >
+            <Link href="/terms" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
               Terms of Service
             </Link>
-            <Link
-              href="/cookies"
-              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
-            >
+            <Link href="/cookies" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
               Cookie Policy
             </Link>
-            <Link
-              href="/faq"
-              className="text-gray-500 hover:text-accent text-sm transition-colors duration-200"
-            >
+            <Link href="/faq" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
               FAQs
             </Link>
           </div>

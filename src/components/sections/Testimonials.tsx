@@ -1,65 +1,21 @@
 "use client";
 
-import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
-import { FaUserCircle } from 'react-icons/fa';
-import Button from '@/components/ui/Button';
+import { useRef, useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
+import Button from "@/components/ui/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  content: string;
-  rating: number;
-  icon: React.ReactNode;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: 'Mr.Ebenezer Amakeh',
-    role: 'CEO at Vestra Versa',
-    content: 'Working with MEGAS TECH INC. was a game-changer for our business. Their innovative solutions helped us increase our online presence significantly.',
-    rating: 5,
-    icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
-  },
-  {
-    id: 2,
-    name: 'Mr. Theophilus Arthur',
-    role: 'CEO of Teebel Global Travel Consultancy',
-    content: 'The team at MEGAS TECH INC. delivered beyond our expectations. Their attention to detail and technical expertise is unmatched in the industry.',
-    rating: 5,
-    icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
-  },
-  {
-    id: 3,
-    name: 'Miss Elizabeth Obeng',
-    role: 'Assistant Managing Director',
-    content: 'Their development team is incredibly responsive and professional. They transformed our ideas into a beautiful, functional product.',
-    rating: 4,
-    icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
-  },
-  {
-    id: 4,
-    name: 'Mr. Dermolahu',
-    role: 'Founder & CEO of Dermolahu Draughtmanship & Construction Works',
-    content: 'MEGAS TECH INC. built our e-commerce platform from scratch. The results have been outstanding, with a significantly huge increase in sales.',
-    rating: 5,
-    icon: <FaUserCircle className="w-12 h-12 text-accent/80" />
-  }
-];
+import { testimonials } from "@/data/testimonials";
 
 const Testimonials = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
 
   const nextTestimonial = () => {
     setActiveIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
@@ -69,198 +25,169 @@ const Testimonials = () => {
     setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
   };
 
-  const goToTestimonial = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  // Handle touch events for mobile swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent) =>
     setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent) =>
     setTouchEnd(e.targetTouches[0].clientX);
-  };
-
   const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      nextTestimonial();
-    }
-
-    if (touchStart - touchEnd < -50) {
-      prevTestimonial();
-    }
+    if (touchStart - touchEnd > 50) nextTestimonial();
+    if (touchStart - touchEnd < -50) prevTestimonial();
   };
 
-  // Auto-rotate testimonials
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextTestimonial();
-    }, 8000);
-
+    const interval = setInterval(nextTestimonial, 8000);
     return () => clearInterval(interval);
   }, []);
 
-  // GSAP animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate heading
       gsap.fromTo(
-        headingRef.current,
-        { y: 50, opacity: 0 },
+        headerRef.current,
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.7,
           scrollTrigger: {
-            trigger: headingRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
           },
-        }
+        },
       );
-
-      // Animate testimonials
-      const cards = gsap.utils.toArray<Element>('.testimonial-card');
-      cards.forEach((card, i: number) => {
-        gsap.fromTo(
-          card,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.6,
-            delay: i * 0.1,
-            scrollTrigger: {
-              trigger: card,
-              start: 'top 90%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      });
     }, sectionRef);
-
     return () => ctx.revert();
   }, []);
 
-  // Render star rating
-  const renderStars = (rating: number) => {
-    return Array(5)
+  const renderStars = (rating: number) =>
+    Array(5)
       .fill(0)
       .map((_, i) => (
         <FiStar
           key={i}
-          className={`h-5 w-5 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+          className={`h-4 w-4 ${i < rating ? "text-amber-400 fill-current" : "text-white/10"}`}
         />
       ));
-  };
+
+  const active = testimonials[activeIndex];
 
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 md:py-28 lg:py-36 bg-gray-50 dark:bg-gray-900 overflow-hidden"
       id="testimonials"
+      className="py-20 md:py-28 overflow-hidden"
+      style={{ background: 'var(--bg-secondary)' }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        {/* Header */}
+        <div ref={headerRef} className="text-center mb-14">
+          <span className="label-pill mb-4 inline-flex">Client Stories</span>
           <h2
-            ref={headingRef}
-            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+            className="text-white mb-4"
+            style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}
           >
             What Our Clients Say
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what our clients have to say about working with us.
+          <p className="text-[#A1A1AA] text-lg max-w-2xl mx-auto leading-relaxed">
+            Don&apos;t just take our word for it. Here&apos;s what our clients
+            have to say about working with us.
           </p>
         </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevTestimonial}
-            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-10 w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg items-center justify-center text-gray-700 dark:text-gray-200 hover:text-accent dark:hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            aria-label="Previous testimonial"
-          >
-            <FiChevronLeft className="w-6 h-6" />
-          </button>
-
-          <button
-            onClick={nextTestimonial}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-10 w-12 h-12 rounded-full bg-white dark:bg-gray-800 shadow-lg items-center justify-center text-gray-700 dark:text-gray-200 hover:text-accent dark:hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            aria-label="Next testimonial"
-          >
-            <FiChevronRight className="w-6 h-6" />
-          </button>
-
-          {/* Testimonials Carousel */}
+        {/* Testimonial Card */}
+        <div className="relative max-w-3xl mx-auto">
           <div
-            ref={carouselRef}
-            className="relative overflow-hidden"
+            className="bg-[#121214] border border-white/10 rounded-card shadow-card p-8 md:p-10 transition-all duration-500"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
+            {/* Large quote mark */}
             <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{
-                transform: `translateX(-${activeIndex * 100}%)`,
-              }}
+              className="text-7xl leading-none font-serif text-[#333333] select-none mb-4"
+              aria-hidden="true"
             >
-              {testimonials.map((testimonial) => (
+              &ldquo;
+            </div>
+
+            {/* Quote */}
+            <p className="text-white text-lg md:text-xl leading-relaxed mb-8 font-medium">
+              {active.content}
+            </p>
+
+            {/* Author */}
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-3">
+                {/* Avatar */}
                 <div
-                  key={testimonial.id}
-                  className="w-full flex-shrink-0 px-4 testimonial-card"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+                  style={{ background: active.color }}
                 >
-                  <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-10 h-full">
-                    <div className="flex items-center mb-4">
-                      <div className="mr-4">
-                        {testimonial.icon}
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          {testimonial.role}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="mb-6">
-                      <div className="flex mb-2">{renderStars(testimonial.rating)}</div>
-                      <p className="text-gray-700 dark:text-gray-300 italic">
-                        &ldquo;{testimonial.content}&rdquo;
-                      </p>
-                    </div>
+                  {active.initials}
+                </div>
+                <div>
+                  <div
+                    className="font-semibold text-white text-sm"
+                    style={{
+                      fontFamily: "var(--font-plus-jakarta), sans-serif",
+                    }}
+                  >
+                    {active.name}
+                  </div>
+                  <div className="text-[#A1A1AA] text-xs mt-0.5">
+                    {active.role}
                   </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Stars */}
+              <div className="flex items-center gap-0.5">
+                {renderStars(active.rating)}
+              </div>
             </div>
           </div>
 
-          {/* Dots Navigation */}
-          <div className="flex justify-center mt-8 space-x-2">
-            {testimonials.map((_, index) => (
+          {/* Navigation */}
+          <div className="flex items-center justify-between mt-6">
+            {/* Dot indicators */}
+            <div className="flex items-center gap-1.5">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    index === activeIndex
+                      ? "bg-accent w-5"
+                      : "bg-white/20 w-1.5 hover:bg-white/40"
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Arrow buttons */}
+            <div className="flex items-center gap-2">
               <button
-                key={index}
-                onClick={() => goToTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                  index === activeIndex ? 'bg-accent' : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+                onClick={prevTestimonial}
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/10 hover:shadow-xs transition-all duration-200"
+                aria-label="Previous testimonial"
+              >
+                <FiChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/10 hover:shadow-xs transition-all duration-200"
+                aria-label="Next testimonial"
+              >
+                <FiChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="text-center mt-16">
-          <Button
-            as="a"
-            href="/testimonials"
-            variant="accent"
-            size="lg"
-            className="mx-auto"
-          >
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Button as="a" href="/testimonials" variant="outline" size="lg">
             Share Your Experience
           </Button>
         </div>

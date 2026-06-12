@@ -3,22 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FiMenu,
-  FiX,
-  FiCode,
-  FiTool,
-  FiMessageSquare,
-  FiMail,
-  FiChevronDown,
-  FiDollarSign,
-  FiInfo,
-  FiHelpCircle,
-  FiBriefcase,
-  FiUser,
-  FiArrowRight,
-  FiHome,
-} from "react-icons/fi";
+import { LuMenu, LuX, LuChevronDown, LuArrowRight } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Button from "../ui/Button";
@@ -26,12 +11,12 @@ import Button from "../ui/Button";
 interface NavLinkItem {
   name: string;
   href: string;
+  description?: string;
 }
 
 interface NavLink {
   name: string;
   href?: string;
-  icon: React.ReactNode;
   isDropdown?: boolean;
   items?: NavLinkItem[];
 }
@@ -43,63 +28,60 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const navLinks: NavLink[] = [
-    { name: "Home", href: "/", icon: <FiHome className="w-5 h-5" /> },
+    { name: "Services", href: "/services" },
+    { name: "Projects", href: "/projects" },
+    { name: "Pricing", href: "/pricing" },
     {
-      name: "Services",
-      href: "/services",
-      icon: <FiTool className="w-5 h-5" />,
-    },
-    {
-      name: "Projects",
-      href: "/projects",
-      icon: <FiCode className="w-5 h-5" />,
-    },
-    {
-      name: "Pricing",
-      href: "/pricing",
-      icon: <FiDollarSign className="w-5 h-5" />,
+      name: "Company",
+      isDropdown: true,
+      items: [
+        {
+          name: "About Us",
+          href: "/about",
+          description: "Our story, mission, and team",
+        },
+        {
+          name: "Blog",
+          href: "/blog",
+          description: "Insights, tutorials and updates",
+        },
+        {
+          name: "Testimonials",
+          href: "/testimonials",
+          description: "What our clients say",
+        },
+        {
+          name: "Careers",
+          href: "/careers",
+          description: "Join the MEGAS team",
+        },
+      ],
     },
     {
       name: "Contact",
-      icon: <FiMail className="w-5 h-5" />,
       isDropdown: true,
       items: [
-        { name: "General Inquiry", href: "/contact" },
-        { name: "Sales Team", href: "/contact/sales" },
+        {
+          name: "General Inquiry",
+          href: "/contact",
+          description: "Get in touch with us",
+        },
+        {
+          name: "Sales Team",
+          href: "/contact/sales",
+          description: "Talk to our sales team",
+        },
+        {
+          name: "FAQs",
+          href: "/faq",
+          description: "Common questions answered",
+        },
       ],
     },
   ];
 
-  const moreLinks: NavLink[] = [
-    { name: "About Us", href: "/about", icon: <FiInfo className="w-4 h-4" /> },
-    {
-      name: "Blog",
-      href: "/blog",
-      icon: <FiMessageSquare className="w-4 h-4" />,
-    },
-    {
-      name: "Testimonials",
-      href: "/testimonials",
-      icon: <FiUser className="w-4 h-4" />,
-    },
-    { name: "FAQs", href: "/faq", icon: <FiHelpCircle className="w-4 h-4" /> },
-    {
-      name: "Careers",
-      href: "/careers",
-      icon: <FiBriefcase className="w-4 h-4" />,
-    },
-  ];
-
   useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -107,279 +89,235 @@ const Navbar = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      // Close dropdowns when clicking outside
-      if (!target.closest(".dropdown-container")) {
-        setOpenDropdown(null);
-      }
-      // Close mobile menu when clicking outside
+      if (!target.closest(".dropdown-container")) setOpenDropdown(null);
       if (
         isOpen &&
         !target.closest(".mobile-menu-container") &&
-        !target.closest("button[aria-expanded]")
+        !target.closest(".mobile-menu-toggle")
       ) {
         setIsOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   const toggleDropdown = (name: string) => {
     setOpenDropdown((prev) => (prev === name ? null : name));
   };
 
+  const isActive = (link: NavLink): boolean => {
+    if (link.href) return pathname === link.href;
+    if (link.items) return link.items.some((item) => pathname === item.href);
+    return false;
+  };
+
   return (
     <header
-      className={`w-full bg-primary/90 backdrop-blur-md py-2 fixed top-0 left-0 z-50 transition-all duration-300 ${
-        scrolled ? "shadow-lg" : ""
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0A0A0B]/90 backdrop-blur-lg border-b border-white/10 shadow-xs"
+          : "bg-[#0A0A0B]/60 backdrop-blur-md"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-12">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center h-8">
+          <Link
+            href="/"
+            className="flex items-center flex-shrink-0"
+            aria-label="MEGAS TECH INC home"
+          >
             <Image
               src="/megas_logo.png"
               alt="MEGAS TECH INC"
-              width={120}
-              height={32}
-              className="h-8 w-auto object-contain"
+              width={130}
+              height={36}
+              className="h-9 w-auto object-contain"
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav
+            className="hidden lg:flex items-center gap-1"
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) =>
               link.isDropdown ? (
                 <div key={link.name} className="relative dropdown-container">
                   <button
                     onClick={() => toggleDropdown(link.name)}
-                    className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 ${
-                      link.items?.some((item) => pathname === item.href)
-                        ? "text-accent bg-accent/10"
-                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                    className={`flex items-center gap-1.5 px-3.5 py-2 text-[0.9375rem] font-medium rounded-lg transition-all duration-200 ${
+                      isActive(link)
+                        ? "text-white bg-white/10"
+                        : "text-[#A1A1AA] hover:text-white hover:bg-white/5"
                     }`}
+                    aria-expanded={openDropdown === link.name}
+                    aria-haspopup="true"
                   >
-                    <span className="text-accent">{link.icon}</span>
-                    <span>{link.name}</span>
-                    <FiChevronDown
-                      className={`w-4 h-4 transition-transform ${openDropdown === link.name ? "transform rotate-180" : ""}`}
+                    {link.name}
+                    <LuChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        openDropdown === link.name ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
 
                   <AnimatePresence>
-                    {openDropdown === link.name &&
-                      link.items &&
-                      link.items.length > 0 && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
-                        >
-                          <div className="py-1">
-                            {link.items.map((item) => (
-                              <Link
-                                key={item.name}
-                                href={item.href}
-                                className="block px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-700"
-                                onClick={() => setOpenDropdown(null)}
-                              >
+                    {openDropdown === link.name && link.items && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="absolute top-full left-0 mt-2 w-64 bg-[#121214] border border-white/10 rounded-card shadow-lg z-50 overflow-hidden"
+                      >
+                        <div className="p-1.5">
+                          {link.items.map((item) => (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              className={`block px-4 py-3 rounded-lg transition-all duration-150 group ${
+                                pathname === item.href
+                                  ? "bg-white/10 text-white"
+                                  : "hover:bg-white/5 text-[#A1A1AA] hover:text-white"
+                              }`}
+                              onClick={() => setOpenDropdown(null)}
+                            >
+                              <div className="text-sm font-medium text-white">
                                 {item.name}
-                              </Link>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
+                              </div>
+                              {item.description && (
+                                <div className="text-xs text-[#71717A] mt-0.5 leading-snug">
+                                  {item.description}
+                                </div>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
                   </AnimatePresence>
                 </div>
               ) : (
                 <Link
                   key={link.name}
                   href={link.href || "#"}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 ${
-                    pathname === link.href
-                      ? "text-accent bg-accent/10"
-                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                  className={`px-3.5 py-2 text-[0.9375rem] font-medium rounded-lg transition-all duration-200 ${
+                    isActive(link)
+                      ? "text-white bg-white/10"
+                      : "text-[#A1A1AA] hover:text-white hover:bg-white/5"
                   }`}
                 >
-                  <span className="text-accent">{link.icon}</span>
-                  <span>{link.name}</span>
+                  {link.name}
                 </Link>
               ),
             )}
-
-            {/* More Dropdown */}
-            <div className="relative dropdown-container">
-              <button
-                onClick={() => toggleDropdown("more")}
-                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200 flex items-center space-x-1.5 ${
-                  moreLinks.some((link) => pathname === link.href)
-                    ? "text-accent bg-accent/10"
-                    : "text-gray-300 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                <span>More</span>
-                <FiChevronDown
-                  className={`w-4 h-4 transition-transform ${openDropdown === "more" ? "transform rotate-180" : ""}`}
-                />
-              </button>
-
-              <AnimatePresence>
-                {openDropdown === "more" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
-                  >
-                    <div className="py-1">
-                      {moreLinks.map((link) => (
-                        <Link
-                          key={link.name}
-                          href={link.href || "#"}
-                          className="block px-3 py-1.5 text-sm text-gray-300 hover:bg-gray-700 flex items-center space-x-2"
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          <span className="text-accent">{link.icon}</span>
-                          <span>{link.name}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <Button href="/pricing" variant="primary" size="sm">
-              <span>Get Started</span>
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </Button>
           </nav>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent"
-              aria-expanded={isOpen}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+          {/* Desktop CTAs */}
+          <div className="hidden lg:flex items-center gap-2">
+            <Link
+              href="/contact/sales"
+              className="px-3.5 py-2 text-[0.9375rem] font-medium text-[#A1A1AA] hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
             >
-              {isOpen ? (
-                <FiX className="block h-6 w-6" />
-              ) : (
-                <FiMenu className="block h-6 w-6" />
-              )}
-            </button>
+              Contact sales
+            </Link>
+            <Button href="/pricing" variant="primary" size="sm">
+              Get Started
+            </Button>
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden mobile-menu-toggle flex items-center justify-center w-10 h-10 rounded-lg text-[#A1A1AA] hover:text-white hover:bg-white/5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+          >
+            {isOpen ? (
+              <LuX className="w-5 h-5" />
+            ) : (
+              <LuMenu className="w-5 h-5" />
+            )}
+          </button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       <AnimatePresence>
         {isOpen && (
-          <div
-            className="fixed inset-0 z-30 md:hidden"
-            onClick={() => setIsOpen(false)}
-          >
+          <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 top-16 bg-black/40 backdrop-blur-[2px] z-40 lg:hidden"
+              onClick={() => setIsOpen(false)}
             />
+            {/* Drawer */}
             <motion.div
-              initial={{ opacity: 0, y: -10, height: 0 }}
-              animate={{ opacity: 1, y: 0, height: "auto" }}
-              exit={{ opacity: 0, y: -10, height: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute left-0 right-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-hidden shadow-lg border-t border-gray-800 mobile-menu-container"
-              onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              role="menu"
-              aria-label="Mobile menu"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="absolute top-full left-0 right-0 bg-[#121214] border-b border-white/10 shadow-lg z-50 lg:hidden mobile-menu-container max-h-[calc(100vh-4rem)] overflow-y-auto"
             >
-              <div className="px-4 py-2 space-y-1">
+              <div className="px-4 py-4 space-y-1">
                 {navLinks.map((link) =>
                   link.isDropdown ? (
-                    <div key={link.name} className="relative">
+                    <div key={link.name}>
                       <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          toggleDropdown(link.name);
-                        }}
-                        onMouseDown={(e) => e.stopPropagation()}
-                        className="w-full flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                        onClick={() => toggleDropdown(link.name)}
+                        className="w-full flex items-center justify-between px-4 py-3 text-[0.9375rem] font-medium text-[#A1A1AA] hover:text-white hover:bg-white/5 rounded-lg transition-all duration-150"
                         aria-expanded={openDropdown === link.name}
-                        aria-haspopup="true"
-                        role="menuitem"
                       >
-                        <div className="flex items-center space-x-3">
-                          <span className="text-accent">{link.icon}</span>
-                          <span>{link.name}</span>
-                        </div>
-                        <span
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            toggleDropdown(link.name);
-                          }}
-                          onMouseDown={(e) => e.stopPropagation()}
-                          className="p-1 flex items-center justify-center"
-                        >
-                          <FiChevronDown
-                            className={`w-4 h-4 transition-transform duration-200 ${openDropdown === link.name ? "transform rotate-180" : ""}`}
-                            aria-hidden="true"
-                          />
-                        </span>
+                        {link.name}
+                        <LuChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ${
+                            openDropdown === link.name ? "rotate-180" : ""
+                          }`}
+                        />
                       </button>
-
                       <AnimatePresence>
                         {openDropdown === link.name && link.items && (
                           <motion.div
-                            initial={{
-                              opacity: 0,
-                              height: 0,
-                              overflow: "hidden",
-                            }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.15, ease: "easeInOut" }}
-                            className="pl-8 space-y-1 mt-1"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.15 }}
+                            className="overflow-hidden pl-4"
                           >
-                            {link.items.map((item) => (
-                              <Link
-                                key={item.name}
-                                href={item.href}
-                                className="block px-3 py-2 text-sm rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setIsOpen(false);
-                                  setOpenDropdown(null);
-                                }}
-                                role="menuitem"
-                              >
-                                {item.name}
-                              </Link>
-                            ))}
+                            <div className="py-1 space-y-0.5">
+                              {link.items.map((item) => (
+                                <Link
+                                  key={item.name}
+                                  href={item.href}
+                                  className="block px-4 py-2.5 text-sm text-[#A1A1AA] hover:text-white hover:bg-white/5 rounded-lg transition-all duration-150"
+                                  onClick={() => {
+                                    setIsOpen(false);
+                                    setOpenDropdown(null);
+                                  }}
+                                >
+                                  {item.name}
+                                </Link>
+                              ))}
+                            </div>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -388,102 +326,39 @@ const Navbar = () => {
                     <Link
                       key={link.name}
                       href={link.href || "#"}
-                      className="flex items-center px-3 py-2.5 text-base font-medium rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                      onClick={() => {
-                        setIsOpen(false);
-                        setOpenDropdown(null);
-                      }}
-                      role="menuitem"
+                      className={`block px-4 py-3 text-[0.9375rem] font-medium rounded-lg transition-all duration-150 ${
+                        isActive(link)
+                          ? "text-white bg-white/10"
+                          : "text-[#A1A1AA] hover:text-white hover:bg-white/5"
+                      }`}
+                      onClick={() => setIsOpen(false)}
                     >
-                      <span className="text-accent mr-3">{link.icon}</span>
                       {link.name}
                     </Link>
                   ),
                 )}
 
-                {/* Mobile More Dropdown */}
-                <div className="relative">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      toggleDropdown("more");
-                    }}
-                    onMouseDown={(e) => e.stopPropagation()}
-                    className="w-full flex items-center justify-between px-3 py-2.5 text-base font-medium rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                    aria-expanded={openDropdown === "more"}
-                    aria-haspopup="true"
-                    role="menuitem"
+                {/* Mobile CTA */}
+                <div className="pt-3 mt-3 border-t border-white/10 space-y-2">
+                  <Link
+                    href="/contact/sales"
+                    className="block px-4 py-3 text-center text-[0.9375rem] font-medium text-[#A1A1AA] hover:text-white hover:bg-white/5 rounded-lg transition-all duration-150"
+                    onClick={() => setIsOpen(false)}
                   >
-                    <div className="flex items-center space-x-3">
-                      <span className="text-accent">
-                        <FiMenu className="w-4 h-4" />
-                      </span>
-                      <span>More</span>
-                    </div>
-                    <span
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        toggleDropdown("more");
-                      }}
-                      onMouseDown={(e) => e.stopPropagation()}
-                      className="p-1 flex items-center justify-center"
-                    >
-                      <FiChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${openDropdown === "more" ? "transform rotate-180" : ""}`}
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </button>
-
-                  <AnimatePresence>
-                    {openDropdown === "more" && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0, overflow: "hidden" }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.15, ease: "easeInOut" }}
-                        className="pl-8 space-y-1 mt-1"
-                      >
-                        {moreLinks.map((link) => (
-                          <Link
-                            key={link.name}
-                            href={link.href || "#"}
-                            className="flex items-center px-3 py-2 text-sm rounded-md transition-colors duration-200 text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setIsOpen(false);
-                              setOpenDropdown(null);
-                            }}
-                            role="menuitem"
-                          >
-                            <span className="text-accent mr-3">
-                              {link.icon}
-                            </span>
-                            {link.name}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                {/* CTA Button */}
-                <div className="mt-2 pt-2 border-t border-gray-800">
+                    Contact sales
+                  </Link>
                   <Link
                     href="/pricing"
-                    className="w-full flex items-center justify-center px-4 py-2.5 text-sm font-medium rounded-md text-primary bg-accent hover:bg-accent/90 transition-colors duration-200"
+                    className="flex items-center justify-center gap-2 w-full px-4 py-3 text-[0.9375rem] font-semibold bg-accent text-white rounded-btn hover:bg-accent-dark transition-all duration-200"
                     onClick={() => setIsOpen(false)}
-                    role="menuitem"
                   >
                     Get Started
-                    <FiArrowRight className="ml-2 w-4 h-4" />
+                    <LuArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>
             </motion.div>
-          </div>
+          </>
         )}
       </AnimatePresence>
     </header>

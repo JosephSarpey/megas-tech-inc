@@ -38,8 +38,8 @@ export default function ContentManagementPage() {
       ctaHref="/contact?service=content-management"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Expert Content Management</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Expert Content Management</h3>
+        <p className="text-[#A1A1AA]">
           Our content management solutions empower your team to create, edit, and manage digital content with ease. We implement user-friendly CMS platforms that streamline your content workflow.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -54,18 +54,18 @@ export default function ContentManagementPage() {
         </div>
         
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <h4 className="font-semibold text-gray-900">Our Solutions</h4>
-            <ul className="mt-2 space-y-1 text-sm text-gray-600">
+          <div className="bg-[#121214] p-4 rounded-lg shadow-md border border-white/10">
+            <h4 className="font-semibold text-white">Our Solutions</h4>
+            <ul className="mt-2 space-y-1 text-sm text-[#A1A1AA]">
               <li>• Custom CMS Development</li>
               <li>• Content Migration</li>
               <li>• Workflow Automation</li>
               <li>• Multi-channel Publishing</li>
             </ul>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <h4 className="font-semibold text-gray-900">Our Process</h4>
-            <ul className="mt-2 space-y-1 text-sm text-gray-600">
+          <div className="bg-[#121214] p-4 rounded-lg shadow-md border border-white/10">
+            <h4 className="font-semibold text-white">Our Process</h4>
+            <ul className="mt-2 space-y-1 text-sm text-[#A1A1AA]">
               <li>• Content Audit & Strategy</li>
               <li>• System Implementation</li>
               <li>• Team Training</li>
@@ -75,8 +75,8 @@ export default function ContentManagementPage() {
         </div>
 
         <div className="mt-8 space-y-4">
-          <h4 className="text-lg font-semibold text-gray-900">Why Choose Our CMS Solutions?</h4>
-          <ul className="space-y-2 text-gray-600">
+          <h4 className="text-lg font-semibold text-white">Why Choose Our CMS Solutions?</h4>
+          <ul className="space-y-2 text-[#A1A1AA]">
             {[
               'User-friendly interfaces for non-technical teams',
               'Scalable solutions that grow with your business',

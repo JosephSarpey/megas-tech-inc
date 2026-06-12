@@ -1,80 +1,112 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FiTool, FiCode, FiServer, FiDatabase, FiCloud, FiShoppingCart, FiArrowRight, FiMail, FiFileText, FiPieChart, FiLayout } from 'react-icons/fi';
+import { 
+  LuCode, 
+  LuLayoutDashboard, 
+  LuWrench, 
+  LuServer, 
+  LuCloud, 
+  LuDatabase, 
+  LuMail, 
+  LuShoppingCart, 
+  LuFileText, 
+  LuChartPie, 
+  LuArrowRight 
+} from "react-icons/lu";
 import Link from 'next/link';
 
 const services = [
   {
     title: 'Web Development',
     description: 'Custom websites and web applications built with modern technologies for optimal performance and user experience.',
-    icon: <FiCode className="w-8 h-8 text-accent-default" />,
+    icon: <LuCode className="w-5 h-5" />,
     href: '/services/web-development',
+    accent: '#10B981',
+    size: 'md:col-span-2 lg:col-span-2'
   },
   {
     title: 'UI/UX Design',
     description: 'Beautiful, intuitive user interfaces and experiences that engage users and drive conversions.',
-    icon: <FiLayout className="w-8 h-8 text-accent-default" />,
+    icon: <LuLayoutDashboard className="w-5 h-5" />,
     href: '/services/ui-ux-design',
+    accent: '#10B981',
+    size: 'md:col-span-1 lg:col-span-1'
   },
   {
     title: 'Tech Consulting',
     description: 'Expert guidance and strategic planning to help you make informed technology decisions.',
-    icon: <FiTool className="w-8 h-8 text-accent-default" />,
+    icon: <LuWrench className="w-5 h-5" />,
     href: '/services/tech-consulting',
+    accent: '#10B981',
+    size: 'md:col-span-1 lg:col-span-1'
   },
   {
-    title: 'Maintenance',
+    title: 'Maintenance & Support',
     description: 'Ongoing support and updates to keep your digital products running smoothly and securely.',
-    icon: <FiServer className="w-8 h-8 text-accent-default" />,
+    icon: <LuServer className="w-5 h-5" />,
     href: '/services/maintenance',
+    accent: '#10B981',
+    size: 'md:col-span-2 lg:col-span-2'
   },
   {
     title: 'Web Hosting',
-    description: 'Affordable and reliable web hosting solutions to ensure your website is always accessible.',
-    icon: <FiCloud className="w-8 h-8 text-accent-default" />,
+    description: 'Affordable and reliable web hosting solutions to ensure your application is always accessible and performant.',
+    icon: <LuCloud className="w-5 h-5" />,
     href: '/services/web-hosting',
+    accent: '#10B981',
+    size: 'md:col-span-1 lg:col-span-1'
   },
   {
     title: 'Domain Registration',
-    description: 'Secure and affordable domain registration to establish your online presence.',
-    icon: <FiDatabase className="w-8 h-8 text-accent-default" />,
+    description: 'Secure and reliable domain registration to establish and protect your brand identity online.',
+    icon: <LuDatabase className="w-5 h-5" />,
     href: '/services/domain-registration',
+    accent: '#10B981',
+    size: 'md:col-span-1 lg:col-span-1'
   },
   {
-    title: 'Email Plans',
-    description: 'Affordable and reliable email hosting solutions to ensure your website is always accessible.',
-    icon: <FiMail className="w-8 h-8 text-accent-default" />,
+    title: 'Email Hosting',
+    description: 'Professional and secure email hosting solutions tailored for enterprise communication.',
+    icon: <LuMail className="w-5 h-5" />,
     href: '/services/email-plans',
+    accent: '#10B981',
+    size: 'md:col-span-1 lg:col-span-1'
   },
   {
     title: 'E-Commerce Solutions',
-    description: 'Secure and scalable online stores that convert visitors into customers.',
-    icon: <FiShoppingCart className="w-8 h-8 text-accent-default" />,
+    description: 'Secure and scalable online stores that convert visitors into loyal customers with seamless checkout.',
+    icon: <LuShoppingCart className="w-5 h-5" />,
     href: '/services/e-commerce',
+    accent: '#10B981',
+    size: 'md:col-span-2 lg:col-span-2'
   },
   {
     title: 'Content Management',
-    description: 'Effortless content creation and management for your website.',
-    icon: <FiFileText className="w-8 h-8 text-accent-default" />,
+    description: 'Effortless content creation and headless CMS integrations for your platform.',
+    icon: <LuFileText className="w-5 h-5" />,
     href: '/services/content-management',
+    accent: '#10B981',
+    size: 'md:col-span-1 lg:col-span-1'
   },
   {
     title: 'Graphic Design',
-    description: 'Professional and modern graphic design for your brand.',
-    icon: <FiPieChart className="w-8 h-8 text-accent-default" />,
+    description: 'Professional and modern graphic design to elevate your brand presence and marketing materials.',
+    icon: <LuChartPie className="w-5 h-5" />,
     href: '/services/graphic-design',
+    accent: '#10B981',
+    size: 'md:col-span-2 lg:col-span-3'
   }
 ]; 
 
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: [0.22, 1, 0.36, 1] // Custom ease curve for a smoother pop
     },
   },
 };
@@ -82,7 +114,7 @@ const fadeInUp: Variants = {
 const stagger: Variants = {
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 };
@@ -94,30 +126,48 @@ export default function ServicesList() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 max-w-6xl mx-auto"
     >
       {services.map((service) => (
         <motion.div
           key={service.title}
           variants={fadeInUp}
-          className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-accent-default/30 transition-all duration-300 flex flex-col h-full"
+          className={`block group ${service.size}`}
         >
-          <div className="flex-1">
-            <div className="w-12 h-12 rounded-lg bg-accent-default/10 flex items-center justify-center mb-4">
-              {service.icon}
+          <Link href={service.href} className="block h-full" aria-label={`View ${service.title} details`}>
+            <div className="h-full bg-[#121214] border border-white/5 rounded-[24px] p-8 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.1)] relative overflow-hidden flex flex-col">
+              {/* Hover accent glow — top-left corner */}
+              <div
+                className="absolute -top-12 -left-12 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
+                style={{ background: `${service.accent}18` }}
+              />
+              
+              {/* Icon */}
+              <div
+                className="w-10 h-10 flex items-center justify-center rounded-xl mb-5 text-white relative z-10"
+                style={{ background: service.accent }}
+              >
+                {service.icon}
+              </div>
+
+              <div className="relative z-10 flex-grow flex flex-col">
+                <h3 
+                  className="text-[1.125rem] font-semibold text-white mb-2 tracking-[-0.01em]"
+                  style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}
+                >
+                  {service.title}
+                </h3>
+                <p className="text-[#A1A1AA] text-sm leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
+
+                <div className="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-all duration-200 group-hover:gap-2.5">
+                  Learn more
+                  <LuArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>
-            <p className="text-gray-300 mb-4">{service.description}</p>
-          </div>
-          <div className="mt-4">
-            <Link
-              href={service.href}
-              className="inline-flex items-center text-accent-default hover:text-accent-light transition-colors text-sm font-medium group"
-            >
-              Learn more
-              <FiArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+          </Link>
         </motion.div>
       ))}
     </motion.div>

@@ -38,8 +38,8 @@ export default function ECommercePage() {
       ctaHref="/contact?service=e-commerce"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Complete E-Commerce Solutions</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Complete E-Commerce Solutions</h3>
+        <p className="text-[#A1A1AA]">
           From small boutique shops to large online marketplaces, we create e-commerce experiences that drive results and grow your business.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -53,8 +53,8 @@ export default function ECommercePage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <div className="bg-gray-50 p-6 rounded-lg">
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">Platforms We Work With</h4>
-            <ul className="space-y-2 text-gray-600">
+            <h4 className="text-lg font-semibold text-white mb-3">Platforms We Work With</h4>
+            <ul className="space-y-2 text-[#A1A1AA]">
               <li className="flex items-center">
                 <span className="text-primary mr-2">•</span>
                 <span>Shopify</span>
@@ -74,8 +74,8 @@ export default function ECommercePage() {
             </ul>
           </div>
           <div className="bg-gray-50 p-6 rounded-lg">
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Features</h4>
-            <ul className="space-y-2 text-gray-600">
+            <h4 className="text-lg font-semibold text-white mb-3">Key Features</h4>
+            <ul className="space-y-2 text-[#A1A1AA]">
               <li className="flex items-center">
                 <span className="text-primary mr-2">•</span>
                 <span>Mobile-Responsive Design</span>

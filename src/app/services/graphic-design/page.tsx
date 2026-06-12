@@ -33,8 +33,8 @@ export default function GraphicDesignPage() {
       ctaHref="/contact?service=graphic-design"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Creative Design Solutions</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Creative Design Solutions</h3>
+        <p className="text-[#A1A1AA]">
           Our talented designers combine creativity with strategy to deliver designs that not only look amazing but also effectively communicate your brand message and drive engagement.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -49,17 +49,17 @@ export default function GraphicDesignPage() {
         </div>
         
         <div className="grid grid-cols-2 gap-4 mt-6">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <h4 className="font-semibold text-gray-900">Design Specialties</h4>
-            <ul className="mt-2 space-y-1 text-sm text-gray-600">
+          <div className="bg-[#121214] p-4 rounded-lg shadow-md border border-white/10">
+            <h4 className="font-semibold text-white">Design Specialties</h4>
+            <ul className="mt-2 space-y-1 text-sm text-[#A1A1AA]">
               <li>• Logo & Brand Identity</li>
               <li>• Print & Digital Marketing</li>
               <li>• Social Media Graphics</li>
             </ul>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <h4 className="font-semibold text-gray-900">Our Process</h4>
-            <ul className="mt-2 space-y-1 text-sm text-gray-600">
+          <div className="bg-[#121214] p-4 rounded-lg shadow-md border border-white/10">
+            <h4 className="font-semibold text-white">Our Process</h4>
+            <ul className="mt-2 space-y-1 text-sm text-[#A1A1AA]">
               <li>• Discovery & Research</li>
               <li>• Concept Development</li>
               <li>• Design & Refinement</li>
@@ -69,8 +69,8 @@ export default function GraphicDesignPage() {
         </div>
 
         <div className="mt-8 space-y-4">
-          <h4 className="text-lg font-semibold text-gray-900">Why Choose Our Design Services?</h4>
-          <ul className="space-y-2 text-gray-600">
+          <h4 className="text-lg font-semibold text-white">Why Choose Our Design Services?</h4>
+          <ul className="space-y-2 text-[#A1A1AA]">
             {[
               'Experienced designers with a keen eye for detail',
               'Custom solutions tailored to your brand',

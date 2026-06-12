@@ -1,43 +1,31 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { FiArrowUp } from 'react-icons/fi';
+import { useEffect, useState } from "react";
+import { FiArrowUp } from "react-icons/fi";
 
 const BackToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    const handleScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 flex justify-end">
-      {isVisible && (
-        <button
-          onClick={scrollToTop}
-          className="bg-accent hover:bg-accent/90 text-white p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ml-auto"
-          aria-label="Back to top"
-        >
-          <FiArrowUp className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
-      )}
-    </div>
+    <button
+      onClick={scrollToTop}
+      aria-label="Back to top"
+      className={`fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-[#121214] border border-white/10 text-[#A1A1AA] shadow-md hover:text-[#10B981] hover:border-[#10B981] hover:shadow-lg transition-all duration-300 ${
+        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+      }`}
+    >
+      <FiArrowUp className="w-4 h-4" />
+    </button>
   );
 };
 

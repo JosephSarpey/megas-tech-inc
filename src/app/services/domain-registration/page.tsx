@@ -38,8 +38,8 @@ export default function DomainRegistrationPage() {
       ctaHref="/contact?service=domain-registration"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Find Your Perfect Domain</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Find Your Perfect Domain</h3>
+        <p className="text-[#A1A1AA]">
           Your domain name is your online identity. Secure it today with our reliable domain registration services.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -52,8 +52,8 @@ export default function DomainRegistrationPage() {
           />
         </div>
         <div className="space-y-4">
-          <h4 className="text-lg font-semibold text-gray-900">Domain Management Tools</h4>
-          <ul className="space-y-2 text-gray-600">
+          <h4 className="text-lg font-semibold text-white">Domain Management Tools</h4>
+          <ul className="space-y-2 text-[#A1A1AA]">
             <li className="flex items-start">
               <span className="text-primary mr-2">•</span>
               <span>Easy domain transfer process</span>

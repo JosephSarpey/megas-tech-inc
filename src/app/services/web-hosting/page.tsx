@@ -38,8 +38,8 @@ export default function WebHostingPage() {
       ctaHref="/contact?service=web-hosting"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Premium Web Hosting Solutions</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Premium Web Hosting Solutions</h3>
+        <p className="text-[#A1A1AA]">
           Our hosting services are designed to provide the perfect balance of performance, security, and reliability for websites of all sizes.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -53,20 +53,20 @@ export default function WebHostingPage() {
         </div>
         <div className="grid grid-cols-2 gap-4 mt-6">
           <div className="p-4 bg-gray-50 rounded-lg">
-            <h4 className="font-semibold text-gray-900">Shared Hosting</h4>
-            <p className="text-sm text-gray-600">Perfect for small to medium websites with moderate traffic.</p>
+            <h4 className="font-semibold text-white">Shared Hosting</h4>
+            <p className="text-sm text-[#A1A1AA]">Perfect for small to medium websites with moderate traffic.</p>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
-            <h4 className="font-semibold text-gray-900">VPS Hosting</h4>
-            <p className="text-sm text-gray-600">Dedicated resources for growing websites and applications.</p>
+            <h4 className="font-semibold text-white">VPS Hosting</h4>
+            <p className="text-sm text-[#A1A1AA]">Dedicated resources for growing websites and applications.</p>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
-            <h4 className="font-semibold text-gray-900">Dedicated Servers</h4>
-            <p className="text-sm text-gray-600">Maximum performance and control for high-traffic websites.</p>
+            <h4 className="font-semibold text-white">Dedicated Servers</h4>
+            <p className="text-sm text-[#A1A1AA]">Maximum performance and control for high-traffic websites.</p>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
-            <h4 className="font-semibold text-gray-900">WordPress Hosting</h4>
-            <p className="text-sm text-gray-600">Optimized specifically for WordPress websites.</p>
+            <h4 className="font-semibold text-white">WordPress Hosting</h4>
+            <p className="text-sm text-[#A1A1AA]">Optimized specifically for WordPress websites.</p>
           </div>
         </div>
       </div>

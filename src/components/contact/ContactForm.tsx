@@ -195,11 +195,11 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="text-center p-8 bg-gray-800 rounded-lg"
+        className="text-center p-8 bg-[#121214] border border-white/10 rounded-lg"
       >
         <FiCheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
         <h3 className="text-2xl font-semibold text-white mb-2">Thank You!</h3>
-        <p className="text-gray-300">
+        <p className="text-[#A1A1AA]">
           {isSalesInquiry 
             ? "We've received your sales inquiry. Our team will contact you shortly to discuss your project."
             : "Your message has been sent successfully. We'll get back to you soon!"}
@@ -220,7 +220,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
           <h2 className="text-2xl font-semibold text-white mb-6">
             {isSalesInquiry ? 'Sales Inquiry' : 'Get in Touch'}
           </h2>
-          <p className="text-gray-300">
+          <p className="text-[#A1A1AA]">
             {isSalesInquiry
               ? "Interested in our services? Fill out the form and our sales team will get back to you shortly."
               : "Have a question or want to work together? Fill out the form and we'll get back to you as soon as possible."}
@@ -234,8 +234,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             </div>
             <div className="ml-4">
               <h3 className="text-lg font-medium text-white">Email Us</h3>
-              <p className="text-gray-300">themegastechinc@gmail.com</p>
-              <p className="text-gray-400 text-sm mt-1">We will respond within 24 hours</p>
+              <p className="text-[#A1A1AA]">themegastechinc@gmail.com</p>
+              <p className="text-[#A1A1AA] text-sm mt-1">We will respond within 24 hours</p>
             </div>
           </div>
 
@@ -245,8 +245,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             </div>
             <div className="ml-4">
               <h3 className="text-lg font-medium text-white">Call Us</h3>
-              <p className="text-gray-300">0553288566</p>
-              <p className="text-gray-400 text-sm mt-1">Mon-Fri, 9am-6pm EST</p>
+              <p className="text-[#A1A1AA]">0553288566</p>
+              <p className="text-[#A1A1AA] text-sm mt-1">Mon-Fri, 9am-6pm EST</p>
             </div>
           </div>
 
@@ -256,8 +256,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
             </div>
             <div className="ml-4">
               <h3 className="text-lg font-medium text-white">Visit Us</h3>
-              <p className="text-gray-300">Kasoa new market road, opposite soccer bet</p>
-              <p className="text-gray-300">Central Region, Ghana</p>
+              <p className="text-[#A1A1AA]">Kasoa new market road, opposite soccer bet</p>
+              <p className="text-[#A1A1AA]">Central Region, Ghana</p>
             </div>
           </div>
         </div>
@@ -268,11 +268,11 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
         animate="visible"
         variants={fadeInUp}
         transition={{ delay: 0.2 }}
-        className="bg-gray-800 p-8 rounded-lg shadow-lg"
+        className="bg-[#121214] border border-white/10 p-8 rounded-lg shadow-lg"
       >
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-[#A1A1AA] mb-1">
               Full Name {errors.name && <span className="text-red-500">*</span>}
             </label>
             <input
@@ -281,8 +281,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-4 py-2 bg-gray-700 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                errors.name ? 'border-red-500' : 'border-gray-600'
+              className={`w-full px-4 py-2 bg-[#0A0A0B] border rounded-md focus:ring-2 focus:ring-accent/15 focus:border-accent ${
+                errors.name ? 'border-red-500' : 'border-white/10'
               }`}
               placeholder="Your name"
             />
@@ -294,7 +294,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-[#A1A1AA] mb-1">
               Email Address {errors.email && <span className="text-red-500">*</span>}
             </label>
             <input
@@ -303,8 +303,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-2 bg-gray-700 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                errors.email ? 'border-red-500' : 'border-gray-600'
+              className={`w-full px-4 py-2 bg-[#0A0A0B] border rounded-md focus:ring-2 focus:ring-accent/15 focus:border-accent ${
+                errors.email ? 'border-red-500' : 'border-white/10'
               }`}
               placeholder="your.email@example.com"
             />
@@ -317,7 +317,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
 
           {!isSalesInquiry && (
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-1">
+              <label htmlFor="subject" className="block text-sm font-medium text-[#A1A1AA] mb-1">
                 Subject *
               </label>
               <input
@@ -326,15 +326,15 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                className="w-full px-4 py-2 bg-[#0A0A0B] border border-white/10 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
                 required
               />
             </div>
           )}
 
           {selectedPlan && (
-            <div className="mb-4 p-4 bg-gray-700/50 rounded-lg border border-accent/20">
-              <p className="text-sm text-gray-300">
+            <div className="mb-4 p-4 bg-[#0A0A0B]/50 rounded-lg border border-accent/20">
+              <p className="text-sm text-[#A1A1AA]">
                 <span className="font-medium">Selected Plan:</span> {selectedPlan.charAt(0).toUpperCase() + selectedPlan.slice(1)}
               </p>
               <input type="hidden" name="plan" value={selectedPlan} />
@@ -342,7 +342,7 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
           )}
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+            <label htmlFor="message" className="block text-sm font-medium text-[#A1A1AA] mb-1">
               {isSalesInquiry ? 'Tell us about your project' : 'Your Message'} {errors.message && <span className="text-red-500">*</span>}
             </label>
             <textarea
@@ -351,8 +351,8 @@ export default function ContactForm({ isSalesInquiry = false, selectedPlan, serv
               rows={5}
               value={formData.message}
               onChange={handleChange}
-              className={`w-full px-4 py-2 bg-gray-700 border rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent ${
-                errors.message ? 'border-red-500' : 'border-gray-600'
+              className={`w-full px-4 py-2 bg-[#0A0A0B] border rounded-md focus:ring-2 focus:ring-accent/15 focus:border-accent ${
+                errors.message ? 'border-red-500' : 'border-white/10'
               }`}
               placeholder="Your message..."
             />

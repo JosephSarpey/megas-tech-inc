@@ -1,48 +1,76 @@
 "use client";
 
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiCode, FiLayers, FiTool, FiMessageSquare, FiArrowRight } from 'react-icons/fi';
-import Button from '@/components/ui/Button';
-import Link from 'next/link';
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  LuCode,
+  LuLayers,
+  LuWrench,
+  LuMessageSquare,
+  LuArrowRight,
+} from "react-icons/lu";
+import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    icon: <FiCode className="w-8 h-8" />,
-    title: 'Web Development',
-    description: 'Custom web applications built with modern technologies to deliver exceptional user experiences and robust functionality.',
-    features: ['React/Next.js', 'Node.js', 'RESTful APIs', 'Database Design'],
-    href: '/services/web-development',
+    icon: <LuCode className="w-5 h-5" />,
+    title: "Web Development",
+    description:
+      "We build custom websites and web apps that look great, run fast, and do exactly what you need them to do.",
+    features: ["React/Next.js", "Node.js", "RESTful APIs", "Database Design"],
+    href: "/services/web-development",
+    accent: "#10B981",
+    size: "large", // spans 2 columns on desktop
   },
   {
-    icon: <FiLayers className="w-8 h-8" />,
-    title: 'UI/UX Design',
-    description: 'Beautiful, intuitive interfaces designed with the user in mind to drive engagement and conversions.',
-    features: ['User Research', 'Wireframing', 'Prototyping', 'UI Development'],
-    href: '/services/ui-ux-design',
+    icon: <LuLayers className="w-5 h-5" />,
+    title: "UI/UX Design",
+    description:
+      "We design beautiful and easy-to-use interfaces that keep your customers happy and coming back for more.",
+    features: ["User Research", "Wireframing", "Prototyping", "UI Development"],
+    href: "/services/ui-ux-design",
+    accent: "#10B981",
+    size: "large",
   },
   {
-    icon: <FiTool className="w-8 h-8" />,
-    title: 'Maintenance & Support',
-    description: 'Ongoing support and maintenance to keep your digital products running smoothly and securely.',
-    features: ['Performance Optimization', 'Security Updates', 'Bug Fixes', 'Technical Support'],
-    href: '/services/maintenance',
+    icon: <LuWrench className="w-5 h-5" />,
+    title: "Maintenance & Support",
+    description:
+      "We keep your website or app running smoothly and securely so you can focus on your business without worry.",
+    features: [
+      "Performance Optimization",
+      "Security Updates",
+      "Bug Fixes",
+      "Technical Support",
+    ],
+    href: "/services/maintenance",
+    accent: "#10B981",
+    size: "small",
   },
   {
-    icon: <FiMessageSquare className="w-8 h-8" />,
-    title: 'Tech Consulting',
-    description: 'Expert guidance to help you make informed technology decisions for your business.',
-    features: ['Technology Audit', 'Solution Architecture', 'Digital Strategy', 'Team Training'],
-    href: '/services/tech-consulting',
+    icon: <LuMessageSquare className="w-5 h-5" />,
+    title: "Tech Consulting",
+    description:
+      "We offer expert advice to help you choose the right technology and strategies for your business goals.",
+    features: [
+      "Technology Audit",
+      "Solution Architecture",
+      "Digital Strategy",
+      "Team Training",
+    ],
+    href: "/services/tech-consulting",
+    accent: "#10B981",
+    size: "small",
   },
 ];
 
 const Services = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -53,40 +81,37 @@ const Services = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate heading
       gsap.fromTo(
-        headingRef.current,
-        { y: 50, opacity: 0 },
+        headerRef.current,
+        { y: 20, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 0.7,
           scrollTrigger: {
-            trigger: headingRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
           },
-        }
+        },
       );
 
-      // Animate cards
       cardsRef.current.forEach((card, index) => {
         if (!card) return;
-        
         gsap.fromTo(
           card,
-          { y: 50, opacity: 0 },
+          { y: 24, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             duration: 0.6,
-            delay: index * 0.15,
+            delay: index * 0.1,
             scrollTrigger: {
               trigger: card,
-              start: 'top 85%',
-              toggleActions: 'play none none none',
+              start: "top 88%",
+              toggleActions: "play none none none",
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -95,67 +120,87 @@ const Services = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="relative bg-gray-900 overflow-hidden py-20">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-accent/30 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-accent/30 rounded-full filter blur-3xl"></div>
-      </div>
-
+    <section
+      ref={sectionRef}
+      id="services"
+      style={{ background: "var(--bg-primary)" }}
+      className="py-20 md:py-28"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block px-3 py-1 text-sm font-semibold text-accent bg-accent/10 rounded-full mb-4">
-            Our Services
-          </span>
-          <h2 ref={headingRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Comprehensive <span className="text-accent">Tech Solutions</span>
+        {/* Section Header */}
+        <div ref={headerRef} className="text-center mb-16">
+          <span className="label-pill mb-4 inline-flex shadow-[0_0_20px_rgba(16,185,129,0.15)]">Our Services</span>
+          <h2
+            className="text-white mb-4 text-4xl md:text-5xl tracking-tight font-bold"
+            style={{ fontFamily: "var(--font-plus-jakarta), sans-serif" }}
+          >
+            Premium <span className="text-accent">Tech Services</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-gray-300">
-            We offer a wide range of technology services to help your business thrive in the digital landscape.
+          <p className="text-[#A1A1AA] text-lg max-w-2xl mx-auto leading-relaxed">
+            Simple and powerful technology solutions to help your business 
+            grow online.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 max-w-5xl mx-auto">
           {services.map((service, index) => (
-            <Link 
+            <Link
               key={service.title}
               href={service.href}
               className="block group"
               aria-label={`View ${service.title} service`}
             >
               <div
-                ref={el => {
+                ref={(el) => {
                   if (el) cardsRef.current[index] = el;
                 }}
-                className="h-full relative bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:scale-105 hover:shadow-accent/10 overflow-hidden"
+                className="h-full bg-[#121214] border border-white/5 rounded-[24px] p-8 transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-[0_0_30px_rgba(16,185,129,0.1)] relative overflow-hidden"
               >
-                {/* Hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
+                {/* Hover accent glow — top-left corner */}
+                <div
+                  className="absolute -top-12 -left-12 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl pointer-events-none"
+                  style={{ background: `${service.accent}18` }}
+                />
+
                 {/* Icon */}
-                <div className="w-16 h-16 flex items-center justify-center bg-accent/10 text-accent rounded-xl mb-6 relative z-10">
+                <div
+                  className="w-10 h-10 flex items-center justify-center rounded-xl mb-5 text-white relative z-10"
+                  style={{ background: service.accent }}
+                >
                   {service.icon}
                 </div>
-                
+
                 {/* Content */}
                 <div className="relative z-10">
-                  <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                  <p className="text-gray-300 mb-4">{service.description}</p>
-                  
-                  <ul className="space-y-2 mb-6">
+                  <h3
+                    className="text-[1.125rem] font-semibold text-white mb-2 tracking-[-0.01em]"
+                    style={{
+                      fontFamily: "var(--font-plus-jakarta), sans-serif",
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p className="text-[#A1A1AA] text-sm leading-relaxed mb-5">
+                    {service.description}
+                  </p>
+
+                  {/* Feature Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center">
-                        <svg className="w-4 h-4 text-accent mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm text-gray-300">{feature}</span>
-                      </li>
+                      <span
+                        key={feature}
+                        className="inline-flex px-2.5 py-1 rounded-full text-xs font-medium bg-white/5 text-[#A1A1AA] border border-white/10"
+                      >
+                        {feature}
+                      </span>
                     ))}
-                  </ul>
-                  
-                  <div className="inline-flex items-center text-accent text-sm font-medium group-hover:underline">
+                  </div>
+
+                  {/* CTA Link */}
+                  <div className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-all duration-200 group-hover:gap-2.5">
                     Learn more
-                    <FiArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    <LuArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>
                 </div>
               </div>
@@ -163,15 +208,9 @@ const Services = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <Button
-            as="a"
-            href="/services"
-            variant="accent" 
-            size="lg"
-            className="group"
-            withArrow
-          >
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <Button as="a" href="/services" variant="outline" size="lg" withArrow>
             View All Services
           </Button>
         </div>

@@ -38,8 +38,8 @@ export default function UIDesignPage() {
       ctaHref="/contact?service=ui-ux-design"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Our Design Process</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Our Design Process</h3>
+        <p className="text-[#A1A1AA]">
           We follow a proven design process to create interfaces that are not only beautiful but also highly functional and user-friendly.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -56,8 +56,8 @@ export default function UIDesignPage() {
               <span className="font-bold">1</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Research & Discovery</h4>
-              <p className="mt-1 text-sm text-gray-600">Understanding your users, business goals, and market landscape.</p>
+              <h4 className="font-semibold text-white">Research & Discovery</h4>
+              <p className="mt-1 text-sm text-[#A1A1AA]">Understanding your users, business goals, and market landscape.</p>
             </div>
           </div>
           <div className="flex items-start">
@@ -65,8 +65,8 @@ export default function UIDesignPage() {
               <span className="font-bold">2</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Wireframing</h4>
-              <p className="mt-1 text-sm text-gray-600">Creating the blueprint for your digital product&apos;s structure and flow.</p>
+              <h4 className="font-semibold text-white">Wireframing</h4>
+              <p className="mt-1 text-sm text-[#A1A1AA]">Creating the blueprint for your digital product&apos;s structure and flow.</p>
             </div>
           </div>
           <div className="flex items-start">
@@ -74,8 +74,8 @@ export default function UIDesignPage() {
               <span className="font-bold">3</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Visual Design</h4>
-              <p className="mt-1 text-sm text-gray-600">Bringing your brand to life with stunning visuals and interactions.</p>
+              <h4 className="font-semibold text-white">Visual Design</h4>
+              <p className="mt-1 text-sm text-[#A1A1AA]">Bringing your brand to life with stunning visuals and interactions.</p>
             </div>
           </div>
           <div className="flex items-start">
@@ -83,8 +83,8 @@ export default function UIDesignPage() {
               <span className="font-bold">4</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Prototyping & Testing</h4>
-              <p className="mt-1 text-sm text-gray-600">Validating designs with real users to ensure optimal experience.</p>
+              <h4 className="font-semibold text-white">Prototyping & Testing</h4>
+              <p className="mt-1 text-sm text-[#A1A1AA]">Validating designs with real users to ensure optimal experience.</p>
             </div>
           </div>
         </div>

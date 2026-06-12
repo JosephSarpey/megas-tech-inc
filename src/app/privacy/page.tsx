@@ -10,24 +10,24 @@ export default function PrivacyPolicy() {
   const lastUpdated = '2025-07-07';
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <main className="min-h-screen bg-[#0A0A0B] py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-[#121214] border border-white/10 rounded-lg shadow-md overflow-hidden">
         <div className="p-8">
           <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
-            <p className="text-gray-600">Last updated: {lastUpdated}</p>
+            <h1 className="text-3xl font-bold text-white mb-2">Privacy Policy</h1>
+            <p className="text-[#A1A1AA]">Last updated: {lastUpdated}</p>
           </div>
 
-          <div className="prose max-w-none">
+          <div className="prose prose-invert max-w-none text-[#A1A1AA]">
             <section className="mb-6">
-              <h2 className="text-xl font-semibold mb-3">1. Introduction</h2>
+              <h2 className="text-white">1. Introduction</h2>
               <p className="mb-3">
                 Welcome to MEGAS TECH INC. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.
               </p>
             </section>
 
             <section className="mb-6">
-              <h2 className="text-xl font-semibold mb-3">2. Information We Collect</h2>
+              <h2 className="text-white">2. Information We Collect</h2>
               <p className="mb-3">We may collect, use, store, and transfer different kinds of personal data about you, including:</p>
               <ul className="list-disc pl-6 mb-3 space-y-1">
                 <li>Identity Data (name, username, title)</li>
@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-6">
-              <h2 className="text-xl font-semibold mb-3">3. How We Use Your Data</h2>
+              <h2 className="text-white">3. How We Use Your Data</h2>
               <p className="mb-3">We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
               <ul className="list-disc pl-6 mb-3 space-y-1">
                 <li>To provide and maintain our service</li>
@@ -53,14 +53,14 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-6">
-              <h2 className="text-xl font-semibold mb-3">4. Data Security</h2>
+              <h2 className="text-white">4. Data Security</h2>
               <p className="mb-3">
                 We have implemented appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way, altered, or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors, and other third parties who have a business need to know.
               </p>
             </section>
 
             <section className="mb-6">
-              <h2 className="text-xl font-semibold mb-3">5. Your Legal Rights</h2>
+              <h2 className="text-white">5. Your Legal Rights</h2>
               <p className="mb-3">Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:</p>
               <ul className="list-disc pl-6 mb-3 space-y-1">
                 <li>Request access to your personal data</li>
@@ -74,7 +74,7 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className="mb-6">
-              <h2 className="text-xl font-semibold mb-3">6. Contact Us</h2>
+              <h2 className="text-white">6. Contact Us</h2>
               <p className="mb-3">
                 If you have any questions about this Privacy Policy, please contact us at{' '}
                 <Link href="mailto:privacy@megastech.inc" className="text-accent hover:underline">

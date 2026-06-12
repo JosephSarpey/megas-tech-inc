@@ -36,25 +36,47 @@ export default async function BookingPage({ searchParams }: { searchParams: Prom
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white pt-24 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            {plan ? `Book ${planTitles[plan as keyof typeof planTitles] || 'Your Plan'}` : 'Get Started'}
+    <div className="min-h-screen pt-32 pb-24" style={{ background: 'var(--bg-primary)' }}>
+      {/* Background elements */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px)',
+          backgroundSize: '24px 24px',
+          maskImage: 'radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%)',
+        }}
+      />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <span className="label-pill mb-6 inline-flex shadow-[0_0_20px_rgba(16,185,129,0.15)]">Get Started</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight" style={{ fontFamily: 'var(--font-plus-jakarta), sans-serif' }}>
+            Book <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-emerald-400">
+              {plan ? `${planTitles[plan as keyof typeof planTitles] || 'Your Plan'}` : 'Your Project'}
+            </span>
           </h1>
-          <div className="w-20 h-1 bg-accent mx-auto mb-6"></div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-[#A1A1AA] leading-relaxed">
             {getPlanMessage()}
           </p>
         </div>
 
-        <div className="bg-gray-800 rounded-lg shadow-xl p-6 sm:p-8">
-          <ContactForm 
-            isSalesInquiry={isSalesInquiry} 
-            selectedPlan={plan}
-            serviceName={service}
-          />
+        {/* Form Section */}
+        <div className="max-w-4xl mx-auto relative group">
+          {/* Subtle background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-[400px] bg-accent/5 rounded-full blur-[100px] pointer-events-none transition-all duration-500 group-hover:bg-accent/10" />
+          
+          <div className="bg-[#121214] border border-white/5 p-8 md:p-12 rounded-[24px] shadow-2xl relative z-10 backdrop-blur-xl transition-all duration-300 hover:border-accent/30">
+            <ContactForm 
+              isSalesInquiry={isSalesInquiry} 
+              selectedPlan={plan}
+              serviceName={service}
+            />
+          </div>
         </div>
+
       </div>
     </div>
   );

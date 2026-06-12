@@ -38,8 +38,8 @@ export default function TechConsultingPage() {
       ctaHref="/contact?service=tech-consulting"
     >
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-gray-900">Our Consulting Approach</h3>
-        <p className="text-gray-600">
+        <h3 className="text-2xl font-bold text-white">Our Consulting Approach</h3>
+        <p className="text-[#A1A1AA]">
           We take a holistic approach to technology consulting, ensuring that every recommendation aligns with your business goals and delivers measurable results.
         </p>
         <div className="relative h-64 w-full rounded-lg overflow-hidden">
@@ -53,8 +53,8 @@ export default function TechConsultingPage() {
         
         <div className="mt-6 space-y-6">
           <div>
-            <h4 className="font-semibold text-lg text-gray-900 mb-2">Our Expertise</h4>
-            <ul className="grid grid-cols-2 gap-2 text-sm text-gray-600">
+            <h4 className="font-semibold text-lg text-white mb-2">Our Expertise</h4>
+            <ul className="grid grid-cols-2 gap-2 text-sm text-[#A1A1AA]">
               <li className="flex items-center">
                 <span className="text-primary mr-2">•</span>
                 Cloud Architecture
@@ -83,7 +83,7 @@ export default function TechConsultingPage() {
           </div>
           
           <div className="bg-primary/5 p-6 rounded-lg">
-            <h4 className="font-semibold text-lg text-gray-900 mb-3">Why Choose Our Consulting Services?</h4>
+            <h4 className="font-semibold text-lg text-white mb-3">Why Choose Our Consulting Services?</h4>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary font-bold mr-2">•</span>

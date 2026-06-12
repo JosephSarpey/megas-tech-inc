@@ -185,7 +185,7 @@ export default function TestimonialForm() {
           <FiCheckCircle className="w-12 h-12 text-green-500" />
         </div>
         <h3 className="text-xl font-semibold text-white mb-2">Thank You!</h3>
-        <p className="text-gray-300">
+        <p className="text-[#A1A1AA]">
           Your testimonial has been submitted successfully. We appreciate your feedback!
         </p>
       </motion.div>
@@ -209,7 +209,7 @@ export default function TestimonialForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium text-[#A1A1AA] mb-1">
             Full Name <span className="text-red-500">*</span>
           </label>
           <input
@@ -218,14 +218,14 @@ export default function TestimonialForm() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 bg-gray-700 border ${errors.name ? 'border-red-500' : 'border-gray-600'} rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors`}
+            className={`w-full px-4 py-3 bg-[#121214] border ${errors.name ? 'border-red-500' : 'border-white/10'} rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors`}
             placeholder="John Doe"
           />
           {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-[#A1A1AA] mb-1">
             Email <span className="text-red-500">*</span>
           </label>
           <input
@@ -234,7 +234,7 @@ export default function TestimonialForm() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 bg-gray-700 border ${errors.email ? 'border-red-500' : 'border-gray-600'} rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors`}
+            className={`w-full px-4 py-3 bg-[#121214] border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors`}
             placeholder="john@example.com"
           />
           {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
@@ -243,7 +243,7 @@ export default function TestimonialForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="position" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="position" className="block text-sm font-medium text-[#A1A1AA] mb-1">
             Position
           </label>
           <input
@@ -252,13 +252,13 @@ export default function TestimonialForm() {
             name="position"
             value={formData.position}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors"
+            className="w-full px-4 py-3 bg-[#121214] border border-white/10 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors"
             placeholder="e.g., CEO, Developer"
           />
         </div>
 
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1">
+          <label htmlFor="company" className="block text-sm font-medium text-[#A1A1AA] mb-1">
             Company (Optional)
           </label>
           <input
@@ -267,14 +267,14 @@ export default function TestimonialForm() {
             name="company"
             value={formData.company}
             onChange={handleChange}
-            className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors"
+            className="w-full px-4 py-3 bg-[#121214] border border-white/10 rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors"
             placeholder="Company Name"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-[#A1A1AA] mb-1">
           Rating <span className="text-red-500">*</span>
         </label>
         <div className="flex items-center space-x-2">
@@ -294,7 +294,7 @@ export default function TestimonialForm() {
                   }));
                 }
               }}
-              className={`text-2xl ${formData.rating && parseInt(formData.rating) >= star ? 'text-yellow-400' : 'text-gray-500'}`}
+              className={`text-2xl ${formData.rating && parseInt(formData.rating) >= star ? 'text-yellow-400' : 'text-[#A1A1AA]'}`}
             >
               ★
             </button>
@@ -304,7 +304,7 @@ export default function TestimonialForm() {
       </div>
 
       <div>
-        <label htmlFor="testimonial" className="block text-sm font-medium text-gray-300 mb-1">
+        <label htmlFor="testimonial" className="block text-sm font-medium text-[#A1A1AA] mb-1">
           Your Testimonial <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -313,7 +313,7 @@ export default function TestimonialForm() {
           value={formData.testimonial}
           onChange={handleChange}
           rows={5}
-          className={`w-full px-4 py-3 bg-gray-700 border ${errors.testimonial ? 'border-red-500' : 'border-gray-600'} rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors`}
+          className={`w-full px-4 py-3 bg-[#121214] border ${errors.testimonial ? 'border-red-500' : 'border-white/10'} rounded-lg focus:ring-2 focus:ring-accent/50 focus:border-accent outline-none transition-colors`}
           placeholder="Share your experience with us..."
         ></textarea>
         {errors.testimonial && <p className="mt-1 text-sm text-red-400">{errors.testimonial}</p>}
