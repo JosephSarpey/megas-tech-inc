@@ -153,23 +153,31 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#71717A]">
-            &copy; {currentYear} MEGAS TECH INC. All rights reserved.
-          </p>
-          <div className="flex items-center gap-5">
-            <Link href="/privacy" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
-              Terms of Service
-            </Link>
-            <Link href="/cookies" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
-              Cookie Policy
-            </Link>
-            <Link href="/faq" className="text-xs text-[#71717A] hover:text-white transition-colors duration-200">
-              FAQs
-            </Link>
+        <div className="mt-16 pt-8 relative">
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+          
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-sm text-[#71717A] flex items-center gap-1.5">
+              &copy; {currentYear} <span className="font-medium text-[#A1A1AA]">MEGAS TECH INC</span>. All rights reserved.
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3">
+              <Link href="/privacy" className="text-sm text-[#71717A] hover:text-white transition-colors duration-300 relative group">
+                Privacy Policy
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+              <Link href="/terms" className="text-sm text-[#71717A] hover:text-white transition-colors duration-300 relative group">
+                Terms of Service
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+              <Link href="/cookies" className="text-sm text-[#71717A] hover:text-white transition-colors duration-300 relative group">
+                Cookie Policy
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+              <Link href="/faq" className="text-sm text-[#71717A] hover:text-white transition-colors duration-300 relative group">
+                FAQs
+                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white/50 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

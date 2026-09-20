@@ -6,7 +6,6 @@ import Image from "next/image";
 import { LuMenu, LuX, LuChevronDown, LuArrowRight } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Button from "../ui/Button";
 
 interface NavLinkItem {
   name: string;
@@ -231,14 +230,17 @@ const Navbar = () => {
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-2">
             <Link
-              href="/contact/sales"
-              className="px-3.5 py-2 text-[0.9375rem] font-medium text-[#A1A1AA] hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5"
+              href="/cybersecurity"
+              className="px-3.5 py-2 text-[0.9375rem] font-semibold text-white border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-200 rounded-lg"
             >
-              Contact sales
+              Cybersecurity
             </Link>
-            <Button href="/pricing" variant="primary" size="sm">
-              Get Started
-            </Button>
+            <Link
+              href="/contact/sales"
+              className="px-3.5 py-2 text-[0.9375rem] font-medium text-white hover:text-[#A1A1AA] transition-colors duration-200 rounded-lg hover:bg-white/5 bg-accent/50"
+            >
+              Contact Sales
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -341,18 +343,18 @@ const Navbar = () => {
                 {/* Mobile CTA */}
                 <div className="pt-3 mt-3 border-t border-white/10 space-y-2">
                   <Link
-                    href="/contact/sales"
-                    className="block px-4 py-3 text-center text-[0.9375rem] font-medium text-[#A1A1AA] hover:text-white hover:bg-white/5 rounded-lg transition-all duration-150"
+                    href="/cybersecurity"
+                    className="block px-4 py-3 text-center text-[0.9375rem] font-semibold text-white border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 rounded-lg transition-all duration-150"
                     onClick={() => setIsOpen(false)}
                   >
-                    Contact sales
+                    Cybersecurity
                   </Link>
                   <Link
-                    href="/pricing"
+                    href="/contact/sales"
                     className="flex items-center justify-center gap-2 w-full px-4 py-3 text-[0.9375rem] font-semibold bg-accent text-white rounded-btn hover:bg-accent-dark transition-all duration-200"
                     onClick={() => setIsOpen(false)}
                   >
-                    Get Started
+                    Contact Sales
                     <LuArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
